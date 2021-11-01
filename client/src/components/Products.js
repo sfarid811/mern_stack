@@ -19,7 +19,7 @@ const Products = () => {
     return (
        
         <div className="max-w-7xl mx-auto h-screen">
-            <div className="grid gap-4 grid-cols-3 md:grid-cols-2 sm:grid-cols-1" >
+            <div className="grid gap-4 grid-cols-3 md:grid-cols-2 sm:grid-cols-1 md:mx-4 sm:mx-4" >
                  {products.map((product, index) => (
                 <Product product={product} key={index} />
             ))}
