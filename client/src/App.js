@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
-import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import Products from './components/Products';
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 const App = () => {
 
@@ -11,9 +12,9 @@ const App = () => {
     <Router>
         <Navbar />
         <LandingPage />
+        <Products />
           <Switch>
-             <Route exact path="/" />
-           
+             <Route exact path='/' />
           </Switch>
       </Router> 
   )

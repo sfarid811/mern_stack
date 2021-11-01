@@ -1,20 +1,10 @@
-import React , {useEffect} from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
-import {useSelector, useDispatch} from 'react-redux';
-import {getAllProducts} from '../actions/productActions';
-import logo from '../assets/logo_home.png'
+//import {getAllProducts} from '../actions/productActions';
+//import logo from '../assets/logo_home.png'
 
 const Navbar = () => {
-    const dispatch = useDispatch();
-    const productList = useSelector(state => (state.productList));
   
-    const { error, loading, products } = productList;
-    console.log(products)
-
-    useEffect(() => {
-        dispatch(getAllProducts())
-       
-    }, [dispatch])
     return (
         <div className="max-w-7xl mx-auto py-6 px-4">
             <nav className="flex justify-between items-center sm:flex-col">
@@ -23,7 +13,7 @@ const Navbar = () => {
                     <Link to="/" className="mr-10 text-lg ">Home</Link>
                     <Link to="/" className="mr-10 text-lg">About</Link>
                     <Link to="/" className="mr-10 text-lg text-center bg-white text-gray-800 rounded-full px-6 py-2">Login</Link>
-                    <Link to="/" className="mr-10 text-lg bg-yellow-500 text-white rounded-full px-6 py-2">Sign Up</Link>
+                    <Link to="/products" className="mr-10 text-lg bg-yellow-500 text-white rounded-full px-6 py-2">Sign Up</Link>
                 </div>
 
             </nav>
