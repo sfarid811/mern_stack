@@ -1,10 +1,21 @@
-import React from 'react'
+import React from 'react';
+import Navbar from './components/Navbar';
+import LandingPage from './components/LandingPage';
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 const App = () => {
+
+  //const date = new Date().toISOString().split("T")[0];
+ 
   return (
-    <div className="max-w-6xl mx-auto bg-gray-200 py-6 px-4">
-        <p className="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, sed?</p>
-    </div>
+    <Router>
+        <Navbar />
+        <LandingPage />
+          <Switch>
+             <Route exact path="/" />
+           
+          </Switch>
+      </Router> 
   )
 }
 

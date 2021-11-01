@@ -1,6 +1,8 @@
 const Product = require("../models/product");
 const formidable = require("formidable");
 const fs = require("fs");
+const mongoose = require("mongoose");
+const { extend } = require("lodash");
 
 
 
@@ -27,7 +29,6 @@ const createProduct = (req, res) => {
       }
     });
   };
-
 
   const getAllProducts = async (req, res) => {
 
@@ -93,12 +94,54 @@ const createProduct = (req, res) => {
   }
 
 
+  const removeProduct = async (req, res) => {
+
+    const { id } = req.params;
+   
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    await Product.findByIdAndRemove(id);
+
+    res.status(204).json({})
+  }
+
+  const updateProduct = async (req, res, next) => {
+    let form = new formidable.IncomingForm({ keepExtensions: true });
+
+    form.parse(req, async (err, fields, files) => {
+      if (err)
+        return res
+          .status(400)
+          .send({ error: "Invalid form data, update failed" });
+  
+      try {
+        let product = req.product;
+        product = extend(product, fields);
+        if (files.photo?.size) {
+          if (files.photo?.size > 1000000)
+            return res
+              .status(400)
+              .send({ error: "Upload failed, Max Size <= 1MB" });
+  
+          product.photo.data = fs.readFileSync(files.photo.path);
+          product.photo.contentType = files.photo.type;
+        }
+        await product.save();
+        // product.photo = undefined;
+        return res.status(200).send(product);
+      } catch (error) {
+        next(error);
+      }
+    });
+  }
 
   module.exports = {
     createProduct,
     getAllProducts,
     photoProduct,
     productById,
-    showProduct
+    showProduct,
+    removeProduct,
+    updateProduct
+
   };
   
