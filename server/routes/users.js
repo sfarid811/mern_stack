@@ -3,12 +3,14 @@ const express = require('express');
 
 const router = express.Router();
 
-const {SignUp, SignIn, signOut } = require('../controllers/userController');
-const {userSignUpValidator} = require('../middlewares/userValidator');
+const {getOneUser} = require('../controllers/userController');
+const {userById} = require('../middlewares/user')
 
-router.post('/signup', [userSignUpValidator], SignUp)
-router.post('/signin', SignIn)
-router.get('/signout', signOut)
+router.get('/profile/:userId', getOneUser)
+
+router.param('userId', userById);
+
+
 
 
 module.exports = router;

@@ -18,11 +18,11 @@ const Navbar = ({ toggle }) => {
     }
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
-    }, [offset])
+    }, [])
 
     let x = ['max-w-7xl mx-auto py-6 px-4'];
     if (scrolled) {
-        x.push('fixed left-0 right-0 bg-gray-100 opacity-75');
+        x.push('fixed left-0 right-0 bg-gray-100 blur-sm');
     }
 
 
@@ -53,7 +53,7 @@ const Navbar = ({ toggle }) => {
                 <div className="flex xs:ml-4 items-center md:hidden">
                     <NavLink to="/" className="mr-10 text-lg font-medium">Home</NavLink>
                     <NavLink to="/products" className="mr-10 text-lg font-medium">About</NavLink>
-                    <NavLink to="/login" className="mr-10 text-lg font-medium text-center bg-white text-gray-800 rounded-full px-2">Login</NavLink>
+                    <NavLink to="/login" className="mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2">Login</NavLink>
                     <NavLink to="/sign-up" exact activeClassName="active" className="mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white rounded-full px-6 py-2">Sign Up</NavLink>
 
                 </div>
