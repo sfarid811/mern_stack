@@ -1,29 +1,31 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {register} from '../actions/userActions';
 
-const SignUp = () => {
+const SignUp = ({history}) => {
 
-  const [user, setUser] = useState({
-    name: '',
-    email : '',
-    password : '',
-  })
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch()
 
-  const userRegister = useSelector((state) => state.userRegister)
-  const { loading, error, userInfo } = userRegister;
-
-  const handleChange = e =>  setUser({...user, [e.target.name] : e.target.value});
-
-
+  // const userRegister = useSelector((state) => state.userRegister)
+  // const { loading, error, userInfo } = userRegister;
   
+
+
   const onSubmit = (e) => {
     e.preventDefault();
-    // dispatch(register(user));
-    console.log("form submitted")
-    setUser({...user, name: '', email : '', password : ''})
-
+    if(name === '' || email === '' || password === '')  {
+      alert('The form should not be emty')
+    };
+    dispatch(register(name, email, password));
+    setName("");
+    setEmail("");
+    setPassword("");
+    
+    console.log("form submitted");
+    history.push('/')
 
   }
     return (
@@ -32,19 +34,19 @@ const SignUp = () => {
           <form onSubmit={onSubmit}>
             <div className="mb-6">
               <label htmlFor="name" className="block text-gray-800 font-bold">Name:</label>
-              <input type="text" name="name" placeholder="Your Name" className="w-full border border-gray-300 py-2 pl-3 rounded mt-2
-               outline-none focus:ring-indigo-600 :ring-indigo-600" autoComplete="off" onChange={handleChange}/>
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} name="name" placeholder="Your Name" className="w-full border border-gray-300 py-2 pl-3 rounded mt-2
+               outline-none focus:ring-indigo-600 :ring-indigo-600" autoComplete="off"/>
             </div>
     
             <div className="mb-6">
               <label htmlFor="email" className="block text-gray-800 font-bold">Email:</label>
-              <input type="email" name="email"  placeholder="@email" className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none 
-              focus:ring-indigo-600 :ring-indigo-600" autoComplete="off" onChange={handleChange}/>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}  name="email"  placeholder="@email" className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none 
+              focus:ring-indigo-600 :ring-indigo-600" autoComplete="off"/>
             </div>
             <div className="">
               <label htmlFor="email" className="block text-gray-800 font-bold">Password:</label>
-              <input type="password" name="password"  placeholder="Password" className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none
-               focus:ring-indigo-600 :ring-indigo-600" autoComplete="off" onChange={handleChange}/>
+              <input type="password" value={password}  onChange={(e) => setPassword(e.target.value)}  name="password"  placeholder="Password" className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none
+               focus:ring-indigo-600 :ring-indigo-600" autoComplete="off" />
             </div>
             <button className="cursor-pointer py-2 px-4 block mt-6 bg-gray-900 hover:bg-gray-700 text-white font-bold w-full text-center rounded">Login</button>
           </form>

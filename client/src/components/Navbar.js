@@ -26,18 +26,17 @@ const Navbar = ({ toggle }) => {
     }
 
 
-
-
     return (
 
         <div className={x.join(" ")}>
             <nav className="flex justify-between items-center">
-                <NavLink to="/" className="text-2xl font-semibold sm:py-4 capitalize">rental dream</NavLink>
+                <NavLink to="/" className="text-2xl font-semibold sm:py-4 capitalize border-l-4 
+                border-indigo-600 rounded-md">rental dream</NavLink>
                 <div className="flex justify-between items-center" onClick={toggle}>
                     <svg
                         className='w-8 h-8 hidden md:block hidden'
                         fill='none'
-                        stroke='currentColor'
+                        stroke='currentColor' 
                         viewBox='0 0 24 24'
                         xmlns='http://www.w3.org/2000/svg'
                     >

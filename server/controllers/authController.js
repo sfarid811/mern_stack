@@ -3,17 +3,34 @@ var jwt = require('jsonwebtoken');
 
 
 
-const Register = (req, res) => {
+const Register = async (req, res) => {
     
-    const user = new User(req.body);
+    const { name, email, password } = req.body;
 
-    user.save((err, user) => {
-        if(err){
-            return res.status(400).send(err)
-        }
-        res.status(201).send(user);
+    const userExists = await User.findOne({ email });
 
-    })
+    if (userExists) {
+        res.status(400)
+        throw new Error('User already exists');
+      }
+
+      const user = await User.create({
+        name,
+        email,
+        password,
+      })
+
+      if (user) {
+        res.status(201).json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+     
+        })
+      } else {
+        res.status(400)
+        throw new Error('Invalid user data')
+      }
 
 }
 
@@ -37,7 +54,8 @@ const Login = (req, res) => {
             
         const token = jwt.sign({_id: user._id, role: user.role}, process.env.JWT_SECRET);
 
-        res.cookie('token', token, {expire: new Date() + 8062000})
+        res.cookie('token', token, {expire: '72h'})
+        //res.cookie('token', token, {expire: new Date() + 8062000})
 
         const { _id, name, email, role } = user;
 

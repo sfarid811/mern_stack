@@ -11,5 +11,8 @@ module.exports = {
       'xs': {'max': '400px'},
     }
   },
+  variants : {
+    backgroundBlendMode: ['hover', 'focus'],
+  }
 
 }
