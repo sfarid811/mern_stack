@@ -32,8 +32,6 @@ export const register = (name, email, password) => async (dispatch) => {
       payload: data,
     })
 
-
-
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
@@ -87,3 +85,4 @@ export const logout = () => (dispatch) => {
     type: USER_LOGOUT,
   })
 }
+
