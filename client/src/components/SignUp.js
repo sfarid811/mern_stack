@@ -18,15 +18,16 @@ const SignUp = ({history}) => {
     e.preventDefault();
     if(name === '' || email === '' || password === '')  {
       alert('The form should not be emty')
-    };
-    dispatch(register(name, email, password));
-    setName("");
-    setEmail("");
-    setPassword("");
-    
-    console.log("form submitted");
-    history.push('/')
-
+    }
+    else {
+      dispatch(register(name, email, password));
+      setName("");
+      setEmail("");
+      setPassword("");
+      history.push('/');
+    }
+  
+ 
   }
     return (
         <div className="h-screen flex justify-center">

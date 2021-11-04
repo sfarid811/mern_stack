@@ -7,7 +7,9 @@ const API_URL = 'http://localhost:8000/api/product'
 const ImageProduct = ({item, url}) => {
     return (
         <div className="flex-col">
-             <img src={`${API_URL}/${url}/${item._id}`} className="h-96 w-full object-cover cursor-pointer bg-opacity-500"/>
+             <img src={`${API_URL}/${url}/${item._id}`} alt={`${item.name}`}
+             
+             className="h-96 w-full object-cover cursor-pointer bg-opacity-500"/>
            
         </div>
     )

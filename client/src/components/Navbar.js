@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { NavLink } from "react-router-dom";
-//import logo from '../assets/logo_home.png'
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../actions/userActions';
+
 
 const Navbar = ({ toggle }) => {
+
+    const dispatch = useDispatch();
+
+    const userRegister = useSelector((state) => state.userRegister)
+    const { loading, error, userInfo } = userRegister;
+
+    console.log(userInfo);
 
     const [scrolled, setScrolled] = useState(false);
 
     const handleScroll = () => {
         const offset = window.scrollY;
-    
+
         if (offset > 92) {
             setScrolled(true);
         }
@@ -25,7 +34,10 @@ const Navbar = ({ toggle }) => {
         x.push('fixed left-0 right-0 bg-gray-100 blur-sm');
     }
 
-
+    const handleLogout = () => {
+        dispatch(logout())
+        
+    }
     return (
 
         <div className={x.join(" ")}>
@@ -36,7 +48,7 @@ const Navbar = ({ toggle }) => {
                     <svg
                         className='w-8 h-8 hidden md:block hidden'
                         fill='none'
-                        stroke='currentColor' 
+                        stroke='currentColor'
                         viewBox='0 0 24 24'
                         xmlns='http://www.w3.org/2000/svg'
                     >
@@ -50,10 +62,24 @@ const Navbar = ({ toggle }) => {
 
                 </div>
                 <div className="flex xs:ml-4 items-center md:hidden">
+
+                {!userInfo && (
+                    <Fragment>
                     <NavLink to="/" className="mr-10 text-lg font-medium">Home</NavLink>
                     <NavLink to="/products" className="mr-10 text-lg font-medium">About</NavLink>
                     <NavLink to="/login" className="mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2">Login</NavLink>
-                    <NavLink to="/sign-up" exact activeClassName="active" className="mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white rounded-full px-6 py-2">Sign Up</NavLink>
+                    <NavLink to="/register" exact activeClassName="active" className="mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white rounded-full px-6 py-2">Sign Up</NavLink>
+                    </Fragment>
+                )}
+
+                    {userInfo && (
+                        <Fragment>
+                            <NavLink to="/" className="mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2">Dashboard</NavLink>
+                            <NavLink to="/" exact activeClassName="active" className="mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white rounded-full px-6 py-2"
+                            onClick={handleLogout}
+                            >Logout</NavLink>
+                        </Fragment>
+                    )}
 
                 </div>
 

@@ -5,7 +5,8 @@ import {
   USER_REGISTER_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAIL
+  USER_LOGIN_FAIL,
+  USER_LOGOUT
 } from '../constants/userConstants';
 import { API_URL } from '../config';
 
@@ -58,7 +59,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post( `${API_URL}/login`,{ email, password }, config)
-    console.log(data.user);
+    // console.log(data.user);
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
@@ -75,4 +76,14 @@ export const login = (email, password) => async (dispatch) => {
           : error.message,
     })
   }
+}
+
+
+export const logout = () => (dispatch) => {
+
+  localStorage.removeItem('userInfo');
+
+  dispatch({
+    type: USER_LOGOUT,
+  })
 }

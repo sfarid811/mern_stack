@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState, Fragment} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {login} from '../actions/userActions';
 
@@ -13,15 +13,14 @@ const Login = ({history}) => {
     e.preventDefault();
     if(email === '' || password === '')  {
       alert('The form should not be emty')
-    };
-    dispatch(login(email, password));
- 
-    setEmail("");
-    setPassword("");
-    
-    console.log("form submitted");
-    history.push('/');
-
+    }
+    else {
+      dispatch(login(email, password));
+      setEmail("");
+      setPassword("");
+      history.push('/');
+  
+    }
   }
     return (
 
@@ -42,7 +41,8 @@ const Login = ({history}) => {
               value={password} onChange={e => setPassword(e.target.value)} 
               />
             </div>
-            <button className="cursor-pointer py-2 px-4 block mt-6 bg-gray-900 hover:bg-gray-700 text-white font-bold w-full text-center rounded">Login</button>
+            <button type='submit' className="cursor-pointer py-2 px-4 block mt-6 bg-gray-900 hover:bg-gray-700 
+            text-white font-bold w-full text-center rounded">Login</button>
           </form>
         </div>
       </div>
