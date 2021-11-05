@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { populateCategory } from '../actions/categoryActions';
-import Products from './Products';
 import { addCategory, removeCategory } from '../actions/categoryActions';
 
 const FilterShop = () => {
@@ -13,8 +12,6 @@ const FilterShop = () => {
   const { categories } = categoryReducer;
 
   const categoryFilter = useSelector(state => (state.filterReducer.category));
-
-
 
 
   useEffect(() => {

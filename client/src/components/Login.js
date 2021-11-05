@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../actions/userActions';
 
-const Login = ({ location, history }) => {
+const Login = ({ history }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -38,7 +38,7 @@ export const populateCategory = () => async (dispatch) => {
 export const addCategory = (data) => {
     return (dispatch) => {
       dispatch({
-        type: "ADD_CATEGORY",
+        type: ADD_CATEGORY,
         payload: data
       });
     };
@@ -47,7 +47,7 @@ export const addCategory = (data) => {
   export const removeCategory = (data) => {
     return (dispatch) => {
       dispatch({
-        type: "REMOVE_CATEGORY",
+        type: REMOVE_CATEGORY,
         payload: data
       
       });

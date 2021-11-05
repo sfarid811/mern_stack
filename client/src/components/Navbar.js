@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/userActions';
 
@@ -7,7 +7,7 @@ import { logout } from '../actions/userActions';
 const Navbar = ({ toggle }) => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    
 
 
     const userLogin = useSelector((state) => state.userLogin)

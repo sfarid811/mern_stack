@@ -33,18 +33,22 @@ const createProduct = (req, res) => {
 // @route   GET /api/product
 // @access  Public
 const getAllProducts = async (req, res) => {
-
+  let order = req.query.order ? req.query.order : "asc";
+  let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+  let limit = req.query.limit ? req.query.limit : 6;
   try {
-    const Products = await Product.find();
-    res.status(200).json(Products);
+    const products = await Product.find({})
+      .select("-photo")
+      .populate("category")
+      .sort([[sortBy, order]])
+      .limit(Number(limit))
+      .exec();
+    return res.status(200).send(products);
+  } catch (error) {
+    return res.status(400).send({ error: "Failed to fetch products" });
   }
-  catch (error) {
-    res.status(400).json({
-      message: 'Something went wrong !'
-    });
-  }
+};
 
-}
 
 const productById = (req, res, next, id) => {
 
