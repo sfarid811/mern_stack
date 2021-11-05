@@ -1,1 +1,3 @@
+export const API_PRODUCT = "http://localhost:8000/api/product"
+export const API_CATEGORY = "http://localhost:8000/api/category"
 export const API_URL = "http://localhost:8000/api/auth";

@@ -65,7 +65,7 @@ const Navbar = ({ toggle }) => {
                 </div>
                 <div className="flex xs:ml-4 items-center md:hidden">
 
-                    {userInfo?.user && (
+                    {userInfo && (
                         <Fragment>
                             <NavLink to="/dashboard" className="mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2">Dashboard</NavLink>
                             <NavLink to="/login" exact className="mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white rounded-full px-6 py-2"
@@ -74,7 +74,7 @@ const Navbar = ({ toggle }) => {
                         </Fragment>
                     )}
         
-                    {!userInfo?.user && (
+                    {!userInfo && (
                             <Fragment>
                             <NavLink to="/" className="mr-10 text-lg font-medium">Home</NavLink>
                             <NavLink to="/products" className="mr-10 text-lg font-medium">About</NavLink>

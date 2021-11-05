@@ -2,7 +2,7 @@ import React , {useEffect} from 'react';
 import Product from './Product';
 import {useSelector, useDispatch} from 'react-redux';
 import {getAllProducts} from '../actions/productActions';
-import {Link} from 'react-router-dom';
+
 
 
 const Products = () => {

@@ -1,6 +1,7 @@
-import {PRODUCT_LIST_REQUEST} from '../constants/productConstants';
-import {PRODUCT_LIST_SUCCESS} from '../constants/productConstants';
-import {PRODUCT_LIST_FAIL} from '../constants/productConstants';
+import {PRODUCT_LIST_REQUEST, 
+    PRODUCT_LIST_SUCCESS,
+    PRODUCT_LIST_FAIL } 
+    from '../constants/productConstants';
 
 
 

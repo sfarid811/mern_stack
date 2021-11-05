@@ -49,7 +49,7 @@ const SignUp = ({history}) => {
               <input type="password" value={password}  onChange={(e) => setPassword(e.target.value)}  name="password"  placeholder="Password" className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none
                focus:ring-indigo-600 :ring-indigo-600" autoComplete="off" />
             </div>
-            <button className="cursor-pointer py-2 px-4 block mt-6 bg-gray-900 hover:bg-gray-700 text-white font-bold w-full text-center rounded">Login</button>
+            <button className="cursor-pointer py-2 px-4 block mt-6 bg-gray-900 hover:bg-gray-700 text-white font-bold w-full text-center rounded">Register</button>
           </form>
         </div>
      
@@ -57,4 +57,4 @@ const SignUp = ({history}) => {
     )
 }
 
-export default SignUp
+export default SignUp;

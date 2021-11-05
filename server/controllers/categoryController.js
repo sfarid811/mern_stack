@@ -6,8 +6,8 @@ const createCategory = (req, res) => {
     const category = new Category(req.body);
 
     category.save((err, category) => {
-         
-        if(err) {
+
+        if (err) {
             return res.status(400).json({
                 error: 'bad Request !'
             })
@@ -19,9 +19,18 @@ const createCategory = (req, res) => {
     })
 }
 
+const getAllCategories = async (req, res) => {
+    try {
+        const categories = await Category.find({});
+        return res.status(200).send(categories);
+    } catch (error) {
+        return res.status(400).send({
+            error: "Failed to list categories"
+        });
+    }
+};
 
-
-  module.exports = {
-    createCategory
-  };
-  
+module.exports = {
+    createCategory,
+    getAllCategories
+};
