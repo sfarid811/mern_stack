@@ -5,7 +5,7 @@ import Products from './components/Products';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Dropdown from './components/Dropdown';
-import FilterShop from './components/FilterShop';
+import Shop from './components/Shop';
 import NotFound from './components/NotFound';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -20,7 +20,7 @@ const App = () => {
     const hideMenu = () => {
       if (window.innerWidth > 768 && isOpen) {
         setIsOpen(false);
-        console.log('i resized');
+      
       }
     };
 
@@ -40,7 +40,7 @@ const App = () => {
              <Route  path='/login' exact component={Login} />
              <Route  path='/register' exact component={SignUp} />
              <Route  path='/products'  exact component={Products}/>
-             <Route  path='/filter'  exact component={FilterShop}/>
+             <Route  path='/shop'  exact component={Shop}/>
              <Route  component={NotFound}/>
           </Switch>
       </Router> 
