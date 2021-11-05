@@ -9,16 +9,25 @@ const { createProduct,
     productById,
      showProduct, 
      removeProduct,
-     updateProduct
+     updateProduct,
+     searchProduct
     } = require('../controllers/productController')
 
 
 router.post('/create', createProduct);
-router.get('/all', getAllProducts);
+
+router.get('/all', getAllProducts)
+
 router.get('/photo/:productId', photoProduct);
+
 router.get('/:id', showProduct);
+
+router.post('/search', searchProduct);
+
 router.delete('/:id', removeProduct);
+
 router.put('/:productId', updateProduct)
+
 router.param('productId', productById)
 
 module.exports = router;

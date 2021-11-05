@@ -7,11 +7,8 @@ const {createCategory, getAllCategories} = require('../controllers/categoryContr
 
 
 
-
-
 router.post('/create', createCategory);
 router.get('/all', getAllCategories)
-
 
 
 

@@ -2,7 +2,7 @@ const Product = require("../models/product");
 const formidable = require("formidable");
 const fs = require("fs");
 const mongoose = require("mongoose");
-const { extend } = require("lodash");
+const { extend, parseInt } = require("lodash");
 
 
 
@@ -35,7 +35,7 @@ const createProduct = (req, res) => {
 const getAllProducts = async (req, res) => {
   let order = req.query.order ? req.query.order : "asc";
   let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
-  let limit = req.query.limit ? req.query.limit : 6;
+  let limit = req.query.limit ? req.query.limit : 9;
   try {
     const products = await Product.find({})
       .select("-photo")
@@ -49,7 +49,46 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const searchProduct = async (req, res) => {
 
+  let order = req.body.order ? req.body.order : "desc";
+  let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+  let limit = req.body.limit ? Nmber(req.body.limit) : 100;
+  let skip = Number(req.body.skip);
+
+  let findArgs = {};
+  try {
+
+    for (let key in req.body.filters) {
+      if (req.body.filters[key].length > 0) {
+        if (key === "price") {
+          findArgs[key] = {
+            $gte: req.body.filters[key][0],
+            $lte: req.body.filters[key][1],
+          };
+        } else {
+          findArgs[key] = req.body.filters[key];
+        }
+      }
+    }
+    const products = await Product.find(findArgs)
+      .select("-photo")
+      .populate("category",)
+      .sort([[sortBy, order]])
+      .skip(skip)
+      .limit(limit)
+      .exec();
+
+    return res.status(200).send({ size: products.length, products });
+
+  }
+  catch (error) {
+    return res.status(400).send({ error: "Could not fetch products" });
+  }
+
+
+
+}
 const productById = (req, res, next, id) => {
 
   Product.findById(id).exec((err, product) => {
@@ -59,12 +98,9 @@ const productById = (req, res, next, id) => {
         error: 'Product not found !'
       })
     }
-
     req.product = product;
     next()
-
   })
-
 
 }
 
@@ -86,8 +122,6 @@ const showProduct = async (req, res) => {
 const photoProduct = (req, res) => {
 
   const { data, contentType } = req.product.photo;
-
-
 
   if (data) {
 
@@ -147,6 +181,7 @@ module.exports = {
   productById,
   showProduct,
   removeProduct,
-  updateProduct
+  updateProduct,
+  searchProduct
 
 };
