@@ -53,7 +53,7 @@ const searchProduct = async (req, res) => {
 
   let order = req.body.order ? req.body.order : "desc";
   let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
-  let limit = req.body.limit ? Nmber(req.body.limit) : 100;
+  let limit = req.body.limit ? Number(req.body.limit) : 100;
   let skip = Number(req.body.skip);
 
   let findArgs = {};

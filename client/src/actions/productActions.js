@@ -1,8 +1,13 @@
-
 import axios from 'axios';
-import {PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL} from '../constants/productConstants';
+import {PRODUCT_LIST_REQUEST, 
+    PRODUCT_LIST_SUCCESS, 
+    PRODUCT_LIST_FAIL,
+    FILTERED_PRODUCTS
+}
+     from '../constants/productConstants';
 
 import {API_PRODUCT} from '../config';
+import {listProductsByFilter} from './index';
 
 
 export const getAllProducts = () => async (dispatch) => { 
@@ -30,3 +35,14 @@ export const getAllProducts = () => async (dispatch) => {
     }
 
 }
+
+export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
+    return async (dispatch) => {
+      let data = await listProductsByFilter(skip, limit, filter);
+      dispatch({
+        type: FILTERED_PRODUCTS,
+        data: { products: data.products, size: data.size },
+      });
+    };
+  };
+  
