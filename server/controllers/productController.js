@@ -80,6 +80,7 @@ const searchProduct = async (req, res) => {
       .exec();
 
     return res.status(200).send({ size: products.length, products });
+  
 
   }
   catch (error) {

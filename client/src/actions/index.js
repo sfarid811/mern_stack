@@ -2,7 +2,7 @@ import {API_PRODUCT} from '../config';
 import axios from 'axios';
 
 
-export const listProductsByFilter = async (skip = 0,limit = 6,filters = {} ) => {
+export const listProductsByFilter = async (skip = 0,limit = 4,filters = {} ) => {
   try {
     let response = await axios.post(`${API_PRODUCT}/search`, {
       skip,

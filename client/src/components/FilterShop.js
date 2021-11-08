@@ -8,8 +8,8 @@ const FilterShop = () => {
   const dispatch = useDispatch();
 
 
-  const categoryReducer = useSelector(state => (state.categoryReducer));
-  const { categories } = categoryReducer;
+  const categories = useSelector(state => (state.categoryReducer.categories));
+ 
 
   const categoryFilter = useSelector(state => (state.filterReducer.category));
 

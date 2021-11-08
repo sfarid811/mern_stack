@@ -16,6 +16,7 @@ export const populateCategory = () => async (dispatch) => {
         dispatch({ type: CATEGORY_LIST_REQUEST })
 
         const { data } = await axios.get(`${API_CATEGORY}/all`);
+        console.log(data, "categories actions")
 
         dispatch({
             type: CATEGORY_LIST_SUCCESS,

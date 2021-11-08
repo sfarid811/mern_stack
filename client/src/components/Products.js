@@ -8,6 +8,7 @@ import { getAllProducts } from '../actions/productActions';
 const Products = () => {
     const dispatch = useDispatch();
     const productList = useSelector(state => (state.productList.products));
+  
 
     useEffect(() => {
         dispatch(getAllProducts())

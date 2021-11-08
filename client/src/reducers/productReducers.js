@@ -11,12 +11,12 @@ import {
 const inititalState = {
     loading: false,
     products: [],
-    totalProducts: '',
-    error: ''
+    error: '',
+    size : null
 }
 
 const productReducers = (state = inititalState, action) => {
-    const { type, payload, totalProducts } = action;
+    const { type, payload } = action;
 
     switch (type) {
         case PRODUCT_LIST_REQUEST:
@@ -30,8 +30,6 @@ const productReducers = (state = inititalState, action) => {
                 loading: false,
                 products: [...payload],
 
-
-
             }
         case PRODUCT_LIST_FAIL:
             return {
@@ -39,12 +37,11 @@ const productReducers = (state = inititalState, action) => {
                 error: payload.error
             }
         case FILTERED_PRODUCTS:
-
             return {
                 ...state,
-                products: [...payload],
-                totalProducts: totalProducts,
-            };
+                products: [...action.data.products],
+                size: action.data.size,
+              };
 
         default:
             return state

@@ -6,6 +6,7 @@ import userRegisterReducer  from './reducers/userReducers';
 import userLoginReducer  from './reducers/userReducers';
 import categoryReducer  from './reducers/categoryReducers';
 import shopFilterReducer  from './reducers/shopFilterReducers';
+import alertReducers from './reducers/alertReducers';
 
 
 const reducer = combineReducers({
@@ -13,7 +14,8 @@ const reducer = combineReducers({
    userRegister: userRegisterReducer,
    userLogin: userLoginReducer,
    categoryReducer: categoryReducer,
-   filterReducer: shopFilterReducer
+   filterReducer: shopFilterReducer,
+  alertReducer : alertReducers
 
   })
   const userInfoFromStorage = localStorage.getItem('userInfo')
