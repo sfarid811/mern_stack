@@ -2,7 +2,8 @@ import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAIL,
-    FILTERED_PRODUCTS
+    FILTERED_PRODUCTS,
+    MORE_PRODUCTS
 }
     from '../constants/productConstants';
 
@@ -16,9 +17,9 @@ const inititalState = {
 }
 
 const productReducers = (state = inititalState, action) => {
-    const { type, payload } = action;
+    // const { type, data } = action;
 
-    switch (type) {
+    switch (action.type) {
         case PRODUCT_LIST_REQUEST:
             return {
                 ...state,
@@ -28,21 +29,27 @@ const productReducers = (state = inititalState, action) => {
             return {
                 ...state,
                 loading: false,
-                products: [...payload],
+                products: [...action.data],
 
             }
         case PRODUCT_LIST_FAIL:
             return {
                 ...state,
-                error: payload.error
+                error: action.data.error
             }
         case FILTERED_PRODUCTS:
+
             return {
                 ...state,
                 products: [...action.data.products],
                 size: action.data.size,
-              };
-
+            };
+            case MORE_PRODUCTS:
+                return {
+                  ...state,
+                  products: [...state.products, ...action.data.products],
+                  size: action.data.size,
+                };
         default:
             return state
     }

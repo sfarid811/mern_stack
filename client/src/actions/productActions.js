@@ -2,7 +2,8 @@ import axios from 'axios';
 import {PRODUCT_LIST_REQUEST, 
     PRODUCT_LIST_SUCCESS, 
     PRODUCT_LIST_FAIL,
-    FILTERED_PRODUCTS
+    FILTERED_PRODUCTS,
+    MORE_PRODUCTS
 }
      from '../constants/productConstants';
 
@@ -19,8 +20,8 @@ export const getAllProducts = () => async (dispatch) => {
         // console.log(data.length)
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
-            payload: data,
-            totalProducts: data.length,
+            data
+            // totalProducts: data.length,
         })
      
 
@@ -28,9 +29,7 @@ export const getAllProducts = () => async (dispatch) => {
     catch (error) {
         dispatch({
             type: PRODUCT_LIST_FAIL, 
-            payload: error.data && error.data.message
-            ? error.response.data.message
-            : error.message,
+            data: error.data 
         })
     }
 
@@ -46,3 +45,15 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
     };
   };
   
+
+
+  export const LOAD_MORE_PRODUCTS = (skip, limit, filter) => {
+    return async (dispatch) => {
+      let data = await listProductsByFilter(skip, limit, filter);
+      if (!data.size) throw new Error("No More Products");
+      dispatch({
+        type: MORE_PRODUCTS,
+        data: { products: data.products, size: data.size },
+      });
+    };
+  };

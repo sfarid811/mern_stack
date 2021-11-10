@@ -2,7 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from './ProductCard';
 import FilterShop from './FilterShop';
-import { POPULATE_PRODUCTS_BY_SEARCH } from '../actions/productActions';
+import { POPULATE_PRODUCTS_BY_SEARCH, LOAD_MORE_PRODUCTS } from '../actions/productActions';
+
 
 
 const Shop = () => {
@@ -15,11 +16,25 @@ const Shop = () => {
 
 
   const skip = useRef(0);
-  let limit = 4;
+  let limit = 2;
   useEffect(() => {
     skip.current = 0;
     dispatch(POPULATE_PRODUCTS_BY_SEARCH(skip.current, limit, shopFilter))
   }, [dispatch, shopFilter, skip, limit]);
+
+  const loadMore = async () => {
+  
+    try {
+      let toSkip = skip.current + limit;
+      await dispatch(LOAD_MORE_PRODUCTS(toSkip, limit, shopFilter));
+      skip.current = toSkip;
+    } catch (error) {
+      skip.current = 0;
+      alert(error.message);
+    }
+    
+  };
+
 
   return (
     <div className="max-w-7xl mx-auto py-32">
@@ -29,11 +44,15 @@ const Shop = () => {
 
         </div>
         <div className="w-2/3 sm:w-full">
-          <div className="grid gap-4 grid-cols-3 md:grid-cols-2 sm:grid-cols-1 md:mx-4 sm:mx-4">
+          <div className="grid gap-4 grid-cols-2 md:grid-cols-1 sm:grid-cols-1 md:mx-4 sm:mx-4">
             {productList.map((product, index) => (
               <ProductCard product={product} key={index} />
             ))}
           </div>
+
+          <button className="bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-700 w-full my-12"
+          onClick={() => loadMore()}
+          >Load More</button>
         </div>
 
       </div>

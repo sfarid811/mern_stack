@@ -15,7 +15,7 @@ const reducer = combineReducers({
    userLogin: userLoginReducer,
    categoryReducer: categoryReducer,
    filterReducer: shopFilterReducer,
-  alertReducer : alertReducers
+  
 
   })
   const userInfoFromStorage = localStorage.getItem('userInfo')

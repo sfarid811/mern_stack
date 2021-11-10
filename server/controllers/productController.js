@@ -33,24 +33,31 @@ const createProduct = (req, res) => {
 // @route   GET /api/product
 // @access  Public
 const getAllProducts = async (req, res) => {
-  let order = req.query.order ? req.query.order : "asc";
-  let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
-  let limit = req.query.limit ? req.query.limit : 9;
-  try {
-    const products = await Product.find({})
-      .select("-photo")
-      .populate("category")
-      .sort([[sortBy, order]])
-      .limit(Number(limit))
-      .exec();
-    return res.status(200).send(products);
-  } catch (error) {
-    return res.status(400).send({ error: "Failed to fetch products" });
-  }
+  let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+  let order = req.query.order ? req.query.order : 'asc';
+  let limit = req.query.limit ? parseInt(req.query.limit) : 100;
+
+  Product.find()
+         .select("-photo")
+         .populate('category')
+         .sort([[sortBy, order]])
+         .limit(limit)
+         .exec((err, products) => {
+
+            if(err) {
+                return res.status(404).json({
+                    error: "Products not found !"
+                })
+            }
+
+            res.json({
+                products
+            })
+         })
+
 };
 
 const searchProduct = async (req, res) => {
-
   let order = req.body.order ? req.body.order : "desc";
   let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
   let limit = req.body.limit ? Number(req.body.limit) : 100;
@@ -58,7 +65,6 @@ const searchProduct = async (req, res) => {
 
   let findArgs = {};
   try {
-
     for (let key in req.body.filters) {
       if (req.body.filters[key].length > 0) {
         if (key === "price") {
@@ -71,25 +77,23 @@ const searchProduct = async (req, res) => {
         }
       }
     }
+
     const products = await Product.find(findArgs)
       .select("-photo")
-      .populate("category",)
+      .populate("category", "_id name")
       .sort([[sortBy, order]])
       .skip(skip)
       .limit(limit)
       .exec();
 
     return res.status(200).send({ size: products.length, products });
-  
-
-  }
-  catch (error) {
+  } catch (error) {
     return res.status(400).send({ error: "Could not fetch products" });
   }
 
-
-
 }
+
+
 const productById = (req, res, next, id) => {
 
   Product.findById(id).exec((err, product) => {
