@@ -1,7 +1,7 @@
 import {API_PRODUCT} from '../config';
 import axios from 'axios';
 import {API_CATEGORY} from '../config';
-
+import queryString from "query-string";
 
 
 
@@ -34,3 +34,20 @@ export const listCategories = async () => {
     throw error.response.data;
   }
 };
+
+
+export const listProductsBySearch = async (params) => {
+  const query = queryString.stringify(params);
+  try {
+    let response = await axios.get(`${API_PRODUCT}/search?${query}`);
+    
+
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+
+  }
+};
+
+

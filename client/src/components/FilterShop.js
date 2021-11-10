@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { POPULATE_CATEGORIES } from '../actions/categoryActions';
-import { addCategory, removeCategory } from '../actions/categoryActions';
+import { addCategory, removeCategory, POPULATE_CATEGORIES } from '../actions/categoryActions';
 
 const FilterShop = () => {
 

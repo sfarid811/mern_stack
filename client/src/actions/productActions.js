@@ -3,12 +3,13 @@ import {PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS, 
     PRODUCT_LIST_FAIL,
     FILTERED_PRODUCTS,
-    MORE_PRODUCTS
+    MORE_PRODUCTS,
+    SEARCHED_PRODUCTS
 }
      from '../constants/productConstants';
 
 import {API_PRODUCT} from '../config';
-import {listProductsByFilter} from './index';
+import {listProductsByFilter, listProductsBySearch} from './index';
 
 
 export const getAllProducts = () => async (dispatch) => { 
@@ -17,11 +18,9 @@ export const getAllProducts = () => async (dispatch) => {
         dispatch({type: PRODUCT_LIST_REQUEST})
 
         const {data} = await axios.get(`${API_PRODUCT}/all`);
-        // console.log(data.length)
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             data
-            // totalProducts: data.length,
         })
      
 
@@ -40,8 +39,12 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
       let data = await listProductsByFilter(skip, limit, filter);
       dispatch({
         type: FILTERED_PRODUCTS,
-        data: { products: data.products, size: data.size },
+        data: { 
+          products: data.products, 
+          size: data.size 
+        },
       });
+      
     };
   };
   
@@ -56,4 +59,35 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
         data: { products: data.products, size: data.size },
       });
     };
+  };
+
+
+  export const POPULATE_SEARCHED_PRODUCTS = (params) => {
+    return async (dispatch) => {
+      let data = await listProductsBySearch(params);
+      dispatch({
+        type: SEARCHED_PRODUCTS,
+        data,
+      });
+    };
+  };
+
+
+  export const getProductsByFilter = arg => async (dispatch) => {
+    try {
+      dispatch({type: PRODUCT_LIST_REQUEST})
+
+      const {data} = await axios.post(`${API_PRODUCT}/keyword`, arg);
+  
+      dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: data
+      });
+    }  catch (error) {
+      dispatch({
+          type: PRODUCT_LIST_FAIL, 
+          data: error.data 
+      })
+  }
+    
   };

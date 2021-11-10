@@ -32,11 +32,11 @@ const productReducers = (state = inititalState, action) => {
                 products: [...action.data],
 
             }
-        case PRODUCT_LIST_FAIL:
-            return {
-                ...state,
-                error: action.data.error
-            }
+        // case PRODUCT_LIST_FAIL:
+        //     return {
+        //         ...state,
+        //         error: action.data.error
+        //     }
         case FILTERED_PRODUCTS:
 
             return {

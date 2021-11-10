@@ -37,7 +37,15 @@ const getAllProducts = async (req, res) => {
   let order = req.query.order ? req.query.order : 'asc';
   let limit = req.query.limit ? parseInt(req.query.limit) : 100;
 
-  Product.find()
+  const keyword = req.query.keyword
+  ? {
+      name: {
+        $regex: req.query.keyword,
+        $options: 'i',
+      },
+    }
+  : {}
+  Product.find({...keyword})
          .select("-photo")
          .populate('category')
          .sort([[sortBy, order]])
@@ -92,6 +100,7 @@ const searchProduct = async (req, res) => {
   }
 
 }
+
 
 
 const productById = (req, res, next, id) => {
@@ -179,6 +188,37 @@ const updateProduct = async (req, res, next) => {
   });
 }
 
+
+const searchByQueryType = async (req, res) => {
+ 
+
+  const { type, query } = req.body;
+
+try {
+  let products;
+
+  switch (type) {
+    case 'text':
+      products = await Product.find({ $text: { $search: query } });
+      break;
+    case 'category':
+      products = await Product.find({ category: query });
+      break;
+  }
+
+  if (!products.length > 0) {
+    products = await Product.find({});
+  }
+
+  res.json({ products });
+} catch (err) {
+  console.log(err, 'filter Controller.searchByQueryType error');
+  res.status(500).json({
+    errorMessage: 'Please try again later',
+  });
+}
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
@@ -187,6 +227,8 @@ module.exports = {
   showProduct,
   removeProduct,
   updateProduct,
-  searchProduct
+  searchProduct,
+  searchByQueryType
+  
 
 };
