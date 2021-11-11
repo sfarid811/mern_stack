@@ -9,8 +9,7 @@ import {PRODUCT_LIST_REQUEST,
      from '../constants/productConstants';
 
 import {API_PRODUCT} from '../config';
-import {listProductsByFilter, listProductsBySearch} from './index';
-
+import {listProductsByFilter} from './index';
 
 export const getAllProducts = () => async (dispatch) => { 
 
@@ -18,6 +17,7 @@ export const getAllProducts = () => async (dispatch) => {
         dispatch({type: PRODUCT_LIST_REQUEST})
 
         const {data} = await axios.get(`${API_PRODUCT}/all`);
+      
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             data
@@ -61,17 +61,7 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
     };
   };
 
-
-  export const POPULATE_SEARCHED_PRODUCTS = (params) => {
-    return async (dispatch) => {
-      let data = await listProductsBySearch(params);
-      dispatch({
-        type: SEARCHED_PRODUCTS,
-        data,
-      });
-    };
-  };
-
+ 
 
   export const getProductsByFilter = arg => async (dispatch) => {
     try {

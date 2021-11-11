@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from './ProductCard';
 import FilterShop from './FilterShop';
 import { POPULATE_PRODUCTS_BY_SEARCH, LOAD_MORE_PRODUCTS, 
-  POPULATE_SEARCHED_PRODUCTS,
-   getProductsByFilter
+   getProductsByFilter,
+   getAllProducts
 } from '../actions/productActions';
-
 
 
 const Shop = () => {
@@ -23,20 +22,25 @@ const Shop = () => {
 
   const productList = useSelector((state) => state.productList.products);
 
+ 
 
-  
-  const handleSearch = (e) => {
-    resetState()
-		setText(e.target.value);
+  useEffect(() => {
+    dispatch(getAllProducts())
+  }, [dispatch])
 
-		dispatch(getProductsByFilter({ type: 'text', query: e.target.value }));
-    
-	};
+
+    const handleSearch = (e) => {
+      resetState()
+      setText(e.target.value);
+      dispatch(getProductsByFilter({ type: 'text', query: e.target.value }));
+    }
+ 
 
   const skip = useRef(0);
-  let limit = 4;
+  let limit = 6;
+
   useEffect(() => {
-    skip.current = 0;
+    // skip.current = 0;
     dispatch(POPULATE_PRODUCTS_BY_SEARCH(skip.current, limit, shopFilter))
   }, [dispatch, shopFilter, skip, limit]);
 
@@ -53,7 +57,6 @@ const Shop = () => {
     
   };
  
-
 
   return (
     <div className="max-w-7xl mx-auto py-32">

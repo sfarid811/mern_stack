@@ -6,8 +6,6 @@ import userRegisterReducer  from './reducers/userReducers';
 import userLoginReducer  from './reducers/userReducers';
 import categoryReducer  from './reducers/categoryReducers';
 import shopFilterReducer  from './reducers/shopFilterReducers';
-import alertReducers from './reducers/alertReducers';
-
 
 const reducer = combineReducers({
    productList: productReducers,

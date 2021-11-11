@@ -36,18 +36,4 @@ export const listCategories = async () => {
 };
 
 
-export const listProductsBySearch = async (params) => {
-  const query = queryString.stringify(params);
-  try {
-    let response = await axios.get(`${API_PRODUCT}/search?${query}`);
-    
-
-    console.log(response);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-
-  }
-};
-
 
