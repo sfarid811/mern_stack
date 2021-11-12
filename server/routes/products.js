@@ -3,19 +3,22 @@ const express = require('express');
 
 const router = express.Router();
 
-const { createProduct, 
-    getAllProducts, 
-    photoProduct, 
+const { createProduct,
+    getAllProducts,
+    photoProduct,
     productById,
-     showProduct, 
-     removeProduct,
-     updateProduct,
-     searchProduct,
-     searchByQueryType
-    } = require('../controllers/productController')
-// const {searchByQueryType} = require('../controllers/filterController');
+    showProduct,
+    removeProduct,
+    updateProduct,
+    searchProduct,
+    searchByQueryType
+} = require('../controllers/productController')
 
-router.post('/create', createProduct);
+
+const { userById } = require('../middlewares/user');
+const { requireSignIn, isAuth, isAdmin } = require('../middlewares/auth');
+
+router.post('/create/:userId', [requireSignIn, isAuth, isAdmin], createProduct);
 
 router.get('/all', getAllProducts)
 
@@ -29,10 +32,12 @@ router.post('/search', searchProduct);
 // pour la recherche input
 router.post('/keyword', searchByQueryType)
 
-router.delete('/:id', removeProduct);
+router.delete('/:productId/:userId', [requireSignIn, isAuth, isAdmin], removeProduct);
 
-router.put('/:productId', updateProduct)
+router.put('/:productId/:userId', [requireSignIn, isAuth, isAdmin],updateProduct);
 
-router.param('productId', productById)
+router.param('userId', userById);
+router.param('productId', productById);
+
 
 module.exports = router;

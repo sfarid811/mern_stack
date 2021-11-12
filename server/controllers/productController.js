@@ -143,12 +143,19 @@ const photoProduct = (req, res) => {
 
 const removeProduct = async (req, res) => {
 
-  const { id } = req.params;
+  let product = req.product
 
-  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-  await Product.findByIdAndRemove(id);
+  product.remove((err, product) => {
 
-  res.status(204).json({})
+      if(err) {
+          return res.status(404).json({
+              error: "Product not found !"
+          })
+      }
+
+      res.status(204).json({})
+
+  })
 }
 
 const updateProduct = async (req, res, next) => {
