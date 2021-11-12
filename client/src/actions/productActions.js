@@ -4,7 +4,9 @@ import {PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_FAIL,
     FILTERED_PRODUCTS,
     MORE_PRODUCTS,
-    
+    PRODUCT_CREATE_REQUEST,
+    PRODUCT_CREATE_SUCCESS,
+    PRODUCT_CREATE_FAIL,
 }
      from '../constants/productConstants';
 
@@ -81,3 +83,7 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
   }
     
   };
+
+
+
+  

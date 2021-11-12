@@ -11,8 +11,39 @@ const requireSignIn = expressJWT({
     userProperty : 'auth'
 })
 
+const isAuth = (req, res, next) => {
 
+    if(req.auth.role == 1) {
+        return next();
+    }
+
+   let user = req.profile && req.auth && (req.profile._id == req.auth._id)
+
+    if(!user) {
+        return res.status(403).json({
+            error: "Access Denied"
+        })
+    }
+
+    next()
+
+}
+
+const isAdmin = (req, res, next) => {
+
+  
+    if(req.auth.role == 0) {
+        return res.status(403).json({
+            error: "Admin Resource, Access Denied !"
+        })
+    }
+
+    next();
+ }
+ 
 
 module.exports = {
-requireSignIn
+requireSignIn,
+isAuth,
+isAdmin
 }
