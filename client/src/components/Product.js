@@ -14,9 +14,9 @@ const Product = ({ product }) => {
                  <span className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold px-4 py-2 cursor-pointer">For rent</span>
                 </div>
                 <div className="flex my-6 px-4 justify-around">
-                    <span className="flex justify-center items-center"><i class="fas fa-bed text-gray-700 mr-2 text-2xl cursor-pointer"></i>2 bed</span>
-                    <span className="flex justify-center items-center"><i class="fas fa-bath text-gray-700 mr-2 text-2xl cursor-pointer"></i>2 Bathroom</span>
-                    <span className="flex justify-center items-center"><i class="fas fa-home text-gray-700 mr-2 text-2xl cursor-pointer"></i>1700 sqft</span>
+                    <span className="flex justify-center items-center"><i class="fas fa-bed text-gray-700 mr-2 hover:text-gray-500 text-2xl cursor-pointer"></i>2 bed</span>
+                    <span className="flex justify-center items-center"><i class="fas fa-bath text-gray-700 mr-2 hover:text-gray-500 text-2xl cursor-pointer"></i>2 Bathroom</span>
+                    <span className="flex justify-center items-center"><i class="fas fa-home text-gray-700 mr-2 hover:text-gray-500 text-2xl cursor-pointer"></i>1700 sqft</span>
                 </div>
                 <button className="bg-gray-900 text-white py-2 px-4 hover:bg-gray-600 capitalize focus:outline-none mt-4">view more</button>
 
