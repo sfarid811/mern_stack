@@ -6,17 +6,17 @@ import {
     from '../constants/categoryConstants';
 
 const shopFilterReducer = (state = { category: [] }, action) => {
-        const {type, payload} = action;
-    switch (type) {
+        
+    switch (action.type) {
         case ADD_CATEGORY:
             return {
                 ...state,
-                category: [...state.category, payload]
+                category: [...state.category, action.data]
             };
         case REMOVE_CATEGORY:
             return {
                 ...state,
-                category: state.category.filter(category => category !== payload),
+                category: state.category.filter(data => data !== action.data),
             };
 
         default:

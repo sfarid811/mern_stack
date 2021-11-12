@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
     category: {
         type: ObjectId,
         ref: 'Category',
-        require: true
+        required: true,
     },
     shipping: {
         type: Boolean,

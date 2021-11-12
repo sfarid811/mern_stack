@@ -23,8 +23,10 @@ router.get('/photo/:productId', photoProduct);
 
 router.get('/:id', showProduct);
 
+// pour la filtration de type checkbox 
 router.post('/search', searchProduct);
 
+// pour la recherche input
 router.post('/keyword', searchByQueryType)
 
 router.delete('/:id', removeProduct);

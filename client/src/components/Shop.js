@@ -15,7 +15,33 @@ const Shop = () => {
 
   const resetState = () => {
 		setText('');
+    setCategoryIds([]);
 
+	};
+
+  const [categoryIds, setCategoryIds] = useState([]);
+  const handleCategory = e => {
+		resetState();
+
+		const currentCategoryChecked = e.target.value;
+		const allCategoriesChecked = [...categoryIds];
+		const indexFound = allCategoriesChecked.indexOf(currentCategoryChecked);
+
+		let updatedCategoryIds;
+		if (indexFound === -1) {
+			// add
+			updatedCategoryIds = [...categoryIds, currentCategoryChecked];
+			setCategoryIds(updatedCategoryIds);
+		} else {
+			// remove
+			updatedCategoryIds = [...categoryIds];
+			updatedCategoryIds.splice(indexFound, 1);
+			setCategoryIds(updatedCategoryIds);
+		}
+
+		dispatch(
+			getProductsByFilter({ type: 'category', query: updatedCategoryIds })
+		);
 	};
 
   const shopFilter = useSelector((state) => state.filterReducer.category);
@@ -23,10 +49,9 @@ const Shop = () => {
   const productList = useSelector((state) => state.productList.products);
 
  
-
   useEffect(() => {
     dispatch(getAllProducts())
-  }, [dispatch])
+  }, [dispatch, text])
 
 
     const handleSearch = (e) => {
@@ -37,10 +62,10 @@ const Shop = () => {
  
 
   const skip = useRef(0);
-  let limit = 6;
+  let limit = 4;
 
   useEffect(() => {
-    // skip.current = 0;
+    skip.current = 0;
     dispatch(POPULATE_PRODUCTS_BY_SEARCH(skip.current, limit, shopFilter))
   }, [dispatch, shopFilter, skip, limit]);
 
@@ -61,12 +86,12 @@ const Shop = () => {
   return (
     <div className="max-w-7xl mx-auto py-32">
            <div className="relative my-12 max-w-lg mx-auto"  >
-            {/* <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
                 <svg className="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
                     <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 
-                    6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    6.13401 17 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-            </span> */}
+            </span>
 
                 <input className="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline" 
                  placeholder="Search"  
@@ -74,11 +99,10 @@ const Shop = () => {
                 value={text}
 								onChange={handleSearch}  
                 />
-              {JSON.stringify(text)}
             </div>
       <div className="flex md:flex-col sm-flex-col">
         <div className="w-1/3 bg-indigo-100 mr-2 sm:w-full sm:mb-12">
-          <FilterShop />
+          <FilterShop categoryIds={categoryIds} handleCategory={handleCategory} />
 
         </div>
         <div className="w-2/3 sm:w-full">

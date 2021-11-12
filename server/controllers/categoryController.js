@@ -22,7 +22,7 @@ const createCategory = (req, res) => {
 const getAllCategories = async (req, res) => {
     try {
         const categories = await Category.find({});
-        return res.status(200).send(categories);
+        return res.status(200).json({categories});
     } catch (error) {
         return res.status(400).send({
             error: "Failed to list categories"

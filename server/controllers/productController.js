@@ -37,15 +37,8 @@ const getAllProducts = async (req, res) => {
   let order = req.query.order ? req.query.order : 'asc';
   let limit = req.query.limit ? parseInt(req.query.limit) : 100;
 
-  const keyword = req.query.keyword
-  ? {
-      name: {
-        $regex: req.query.keyword,
-        $options: 'i',
-      },
-    }
-  : {}
-  Product.find({...keyword})
+  
+  Product.find({})
          .select("-photo")
          .populate('category')
          .sort([[sortBy, order]])
@@ -191,7 +184,6 @@ const updateProduct = async (req, res, next) => {
 
 const searchByQueryType = async (req, res) => {
  
-
   const { type, query } = req.body;
 
 try {
@@ -202,10 +194,10 @@ try {
       products = await Product.find({ $text: { $search: query } });
       break;
     case 'category':
-      products = await Product.find({ category: query });
+      products = await Product.find({ name: query });
       break;
   }
-
+  
   if (!products.length > 0) {
     products = await Product.find({});
   }

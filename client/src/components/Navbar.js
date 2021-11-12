@@ -31,7 +31,7 @@ const Navbar = ({ toggle }) => {
 
     let x = ['max-w-7xl mx-auto py-6 px-4'];
     if (scrolled) {
-        x.push('fixed left-0 right-0 bg-gray-100 blur-sm');
+        x.push('fixed left-0 right-0 top-0 bg-gray-100 blur-sm bg-indigo-100 opacity-90');
     }
 
     const handleLogout = () => {

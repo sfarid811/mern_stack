@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addCategory, removeCategory, POPULATE_CATEGORIES } from '../actions/categoryActions';
+import { getAllCategories } from '../actions/categoryActions';
 
-const FilterShop = () => {
+const FilterShop = ({categoryIds, handleCategory}) => {
 
   const dispatch = useDispatch();
 
@@ -13,7 +13,7 @@ const FilterShop = () => {
 
 
   useEffect(() => {
-    dispatch(POPULATE_CATEGORIES())
+    dispatch(getAllCategories())
 
   }, [dispatch])
 
@@ -26,14 +26,12 @@ const FilterShop = () => {
             {categories && categories.map((category, index) => (
               <label className="inline-flex items-center mt-3" key={index}>
                 <input type="checkbox"
-                  onClick={({ target }) => {
-                    if (target.checked && !categoryFilter.includes(category._id))
-                      dispatch(addCategory(category._id));
-                    if (!target.checked && categoryFilter.includes(category._id))
-                      dispatch(removeCategory(category._id));
-                  }}
                   className="cursor-pointer h-6 w-6 text-white border border-gray-300 
-                rounded-md checked:bg-gray-600 checked:border-transparent text-center focus:outline-none p-1" />
+                rounded-md checked:bg-gray-600 checked:border-transparent text-center focus:outline-none p-1"
+                onClick={categoryIds.includes(category._id)}
+								onClick={handleCategory}
+                id='flexCheckChecked'
+                />
                 <span className="ml-2 text-gray-700">{category.name}</span>
               </label>
 

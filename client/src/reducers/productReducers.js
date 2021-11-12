@@ -7,8 +7,6 @@ import {
 }
     from '../constants/productConstants';
 
-
-
 const inititalState = {
     loading: false,
     products: [],
@@ -17,7 +15,7 @@ const inititalState = {
 }
 
 const productReducers = (state = inititalState, action) => {
-    // const { type, data } = action;
+
 
     switch (action.type) {
         case PRODUCT_LIST_REQUEST:
@@ -29,7 +27,7 @@ const productReducers = (state = inititalState, action) => {
             return {
                 ...state,
                 loading: false,
-                products: [...action.data],
+                products: [...action.payload.products],
 
             }
         // case PRODUCT_LIST_FAIL:

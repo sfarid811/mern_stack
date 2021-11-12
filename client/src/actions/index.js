@@ -1,8 +1,5 @@
 import {API_PRODUCT} from '../config';
 import axios from 'axios';
-import {API_CATEGORY} from '../config';
-import queryString from "query-string";
-
 
 
   export const listProductsByFilter = async (
@@ -23,17 +20,6 @@ import queryString from "query-string";
     }
   };
 
-
-
-export const listCategories = async () => {
-  try {
-    let response = await axios.get(`${API_CATEGORY}/all`);
-    console.log(response, "hadou");
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
 
 
 
