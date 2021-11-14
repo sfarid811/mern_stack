@@ -56,7 +56,7 @@ const Navbar = ({ toggle }) => {
 
                     {userInfo && (
                         <Fragment>
-                            <NavLink to="/dashboard" className="mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2">Dashboard</NavLink>
+                            <NavLink to="/admin/products" className="mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2">Dashboard</NavLink>
                             <NavLink to="/login" exact className="mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white rounded-full px-6 py-2"
                                 onClick={handleLogout}
                             >Logout </NavLink>
