@@ -1,7 +1,18 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {Fragment} from 'react';
+import {NavLink} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../actions/userActions';
 
 const Dropdown = ({isOpen, toggle}) => {
+  const dispatch = useDispatch();
+
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin;
+  const handleLogout = () => {
+    dispatch(logout())
+
+}
     return (
         <div
         className={
@@ -9,13 +20,27 @@ const Dropdown = ({isOpen, toggle}) => {
             ? 'grid grid-rows-4 text-center items-center bg-gray-100 shadow-lg'
             : 'hidden'
         }
-        onClick={toggle}
-      >
+        onClick={toggle}>
            
-           <Link to="/" className="p-4">Home</Link>
-           <Link to="/products" className="p-4">About</Link>
-           <Link to="/login" className="p-4">Login</Link>
-           <Link to="/sign-up" className="p-4 bg-gray-900 rounded-full text-white hover:bg-gray-700 w-1/2 mx-auto mb-2">Sign Up</Link>
+           {userInfo && (
+                        <Fragment>
+                            <NavLink to="/admin/products" className="mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2">Dashboard</NavLink>
+                            <NavLink to="/login" exact className="mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white rounded-full px-6 py-2"
+                                onClick={handleLogout}
+                            >Logout </NavLink>
+
+                        </Fragment>
+                    )}
+
+                    {!userInfo && (
+                        <Fragment>
+                            <NavLink to="/" className="mr-10 text-lg font-medium">Home</NavLink>
+                            <NavLink to="/products" className="mr-10 text-lg font-medium">About</NavLink>
+                            <NavLink to="/login" className="mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2">Login</NavLink>
+                            <NavLink to="/register" className="mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white rounded-full px-6 py-2">Sign Up</NavLink>
+                        </Fragment>
+                    )}
+
            
             
         </div>
