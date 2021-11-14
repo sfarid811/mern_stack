@@ -37,7 +37,6 @@ const Navbar = ({ toggle }) => {
     const handleLogout = () => {
         dispatch(logout())
 
-
     }
     return (
 

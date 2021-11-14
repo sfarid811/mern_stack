@@ -2,9 +2,10 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../../actions/productActions';
 
-import ModalForm from './ModalForm';
+import Modal from './Modal';
 const TableAdmin = () => {
 
+    const [showModal, setShowModal] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -23,7 +24,11 @@ const TableAdmin = () => {
                 <div className="py-8">
                     <div className="flex justify-between">
                         <h2 className="text-2xl font-semibold leading-tight">Products</h2>
-                        <button className="bg-gray-900 text-white py-2 px-4 hover:bg-gray-700  focus:outline-none">+ Add Product</button>
+                        <button className="bg-gray-900 text-white py-2 px-4 hover:bg-gray-700  focus:outline-none"
+                         onClick={() => setShowModal(true)}
+                        >+ Add Product</button>
+
+                        {showModal ? <Modal  setShowModal={setShowModal}/> : null }
                     </div>
                     <div className="my-2 flex sm:flex-row flex-col">
 
