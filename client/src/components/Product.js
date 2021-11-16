@@ -8,7 +8,8 @@ const Product = ({ product }) => {
             <div className="flex flex-col">
                 <ImageProduct item={product} url="/photo" />
                 <h1 className="text-lg font-bold leading-tight text-darken py-4 ml-4">{product.name}</h1>
-                <p className="font-normal text-gray-700 px-4 flex-grow flex-1 pb-4">{product.description.substring(0,85)} <span className="text-xl font-bold text-gray-900">...</span></p>
+                <p className="font-normal text-gray-700 px-4 flex-grow flex-1 pb-4">{product.description.substring(0,85)}
+                 <span className="text-xl font-bold text-gray-900">...</span></p>
                 <div className="flex px-4 justify-around items-center">
                  <span className="text-xl text-gray-900 font-bold">{product.price}/mo</span>
                  <span className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold px-4 py-2 cursor-pointer">For rent</span>

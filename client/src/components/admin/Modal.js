@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllCategories } from '../../actions/categoryActions';
+import {createProduct} from '../../actions/productActions';
+import FileBase from 'react-file-base64';
 
 const Modal = ({ setShowModal }) => {
     const dispatch = useDispatch();
@@ -11,7 +13,7 @@ const Modal = ({ setShowModal }) => {
     const [quantity, setQuantity] = useState(null);
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState(null);
-
+    const [photo, setPhoto] = useState('');
 
     useEffect(() => {
         dispatch(getAllCategories());
@@ -19,6 +21,20 @@ const Modal = ({ setShowModal }) => {
 
     const SubmitData = (e) => {
         e.preventDefault();
+        let data = {
+            name,
+            description,
+            price,
+            category,
+            quantity,
+            photo
+        };
+        let formData = new FormData();
+        for (let key in data) {
+          formData.set(key, data[key]);
+        }
+
+        dispatch(createProduct(formData))
 
     }
 
@@ -36,7 +52,8 @@ const Modal = ({ setShowModal }) => {
 
                 <div className="p-12 inline-block align-bottom bg-white rounded-lg text-left overflow-hidden  transform transition-all
                 w-1/3">
-                    <form className="form">
+                                
+                    <form className="form" onSubmit={SubmitData}>
                         <div className="md:space-y-2 mb-3">
                             <label className="text-xs font-semibold text-gray-600 py-2">Product Photo<abbr className="hidden" title="required">*</abbr></label>
                             <div className="flex items-center py-6">
@@ -45,8 +62,12 @@ const Modal = ({ setShowModal }) => {
                                 </div>
                                 <label className="cursor-pointer ">
                                     <span className="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 
-                                                hover:bg-green-500 hover:shadow-lg">Browse</span>
-                                    <input type="file" className="hidden" />
+                                                hover:bg-green-500 hover:shadow-lg">Picture</span>
+                                    <input type="file" className="hidden" value={photo}
+                                    accept="image/*"
+                                    onChange={(e) => setPhoto(e.target.files[0]) }
+                                   
+                                    />
                                 </label>
                             </div>
                         </div>
@@ -113,15 +134,14 @@ const Modal = ({ setShowModal }) => {
                         <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
                             <button className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider
                                          border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100 focus:outline-none"
-                                onClick={() => setShowModal(false)}
+                                // onClick={() => setShowModal(false)}
                             > Cancel
 
                             </button>
                             <button className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider 
                                         text-white rounded-full hover:shadow-lg hover:bg-green-500 focus:outline-none"
                                 type="submit"
-                                onClick={() => setShowModal(false)}
-                                onSubmit={SubmitData}
+                                // onClick={() => setShowModal(false)}
                             >Save</button>
                         </div>
                     </form>

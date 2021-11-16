@@ -7,11 +7,13 @@ import {PRODUCT_LIST_REQUEST,
     PRODUCT_CREATE_REQUEST,
     PRODUCT_CREATE_SUCCESS,
     PRODUCT_CREATE_FAIL,
+    CREATE_PRODUCT
 }
      from '../constants/productConstants';
 
 import {API_PRODUCT} from '../config';
-import {listProductsByFilter} from './index';
+import {listProductsByFilter, helperProduct} from './index';
+import {extractAuth} from '../components/admin/helper';
 
 export const getAllProducts = () => async (dispatch) => { 
 
@@ -85,5 +87,15 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
   };
 
 
-
+  export const createProduct = (product) => {
+    const { token, user } = extractAuth();
+    return async (dispatch) => {
+      let data = await helperProduct(token, user._id, product);
+      dispatch({
+        type: CREATE_PRODUCT,
+        data,
+      });
+    };
+  };
+  
   

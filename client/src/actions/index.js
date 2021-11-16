@@ -21,5 +21,19 @@ import axios from 'axios';
   };
 
 
-
+  export const helperProduct = async (token, userId, data) => {
+    try {
+      let response = await axios.post(`${API_PRODUCT}/create/${userId}`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  };
+  
 

@@ -8,6 +8,7 @@ import Dropdown from './components/Dropdown';
 import Shop from './components/Shop';
 import NotFound from './components/NotFound';
 import TableAdmin from './components/admin/TableAdmin';
+import PrivateRoute from './components/admin/PrivateRoute';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 const App = () => {
@@ -42,7 +43,7 @@ const App = () => {
              <Route  path='/register' exact component={SignUp} />
              <Route  path='/products'  exact component={Products}/>
              <Route  path='/shop'  exact component={Shop}/>
-             <Route  path='/admin/products'  exact component={TableAdmin}/>
+             <PrivateRoute  path='/admin/products'  exact component={TableAdmin}/>
              <Route  component={NotFound}/>
           </Switch>
       </Router> 
