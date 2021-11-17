@@ -4,7 +4,7 @@ import {
     PRODUCT_LIST_FAIL,
     FILTERED_PRODUCTS,
     MORE_PRODUCTS,
-    CREATE_PRODUCT
+    PRODUCT_CREATE_SUCCESS
 }
     from '../constants/productConstants';
 
@@ -36,11 +36,11 @@ const productReducers = (state = inititalState, action) => {
                 ...state,
                 error: action.data.error
             }
-        case CREATE_PRODUCT : 
-        return {
-            ...state,
-            products: [...action.payload.products, action.payload]
-        }
+        case PRODUCT_CREATE_SUCCESS : 
+        return { 
+         
+             products: [...state.products, action.payload]
+             };
         
         case FILTERED_PRODUCTS:
 

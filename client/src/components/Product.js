@@ -11,7 +11,7 @@ const Product = ({ product }) => {
                 <p className="font-normal text-gray-700 px-4 flex-grow flex-1 pb-4">{product.description.substring(0,85)}
                  <span className="text-xl font-bold text-gray-900">...</span></p>
                 <div className="flex px-4 justify-around items-center">
-                 <span className="text-xl text-gray-900 font-bold">{product.price}/mo</span>
+                 <span className="text-xl text-gray-900 font-bold">{product.price.toLocaleString('en-US')}/mo</span>
                  <span className="bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold px-4 py-2 cursor-pointer">For rent</span>
                 </div>
                 <div className="flex my-6 px-4 justify-around">

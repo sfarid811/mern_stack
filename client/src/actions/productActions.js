@@ -6,14 +6,13 @@ import {PRODUCT_LIST_REQUEST,
     MORE_PRODUCTS,
     PRODUCT_CREATE_REQUEST,
     PRODUCT_CREATE_SUCCESS,
-    PRODUCT_CREATE_FAIL,
-    CREATE_PRODUCT
+    PRODUCT_CREATE_FAIL
 }
      from '../constants/productConstants';
-
+import {USER_LOGOUT} from '../constants/userConstants';
 import {API_PRODUCT} from '../config';
 import {listProductsByFilter, helperProduct} from './index';
-import {extractAuth} from '../components/admin/helper';
+import {extractAuth, isExists} from '../components/admin/helper';
 
 export const getAllProducts = () => async (dispatch) => { 
 
@@ -87,15 +86,46 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
   };
 
 
-  export const createProduct = (product) => {
-    const { token, user } = extractAuth();
-    return async (dispatch) => {
-      let data = await helperProduct(token, user._id, product);
+  // export const createProduct = (product) => {
+  //   const { token, user } = extractAuth();
+  //   return async (dispatch) => {
+  //     let data = await helperProduct(token, user._id, product);
+  //     dispatch({
+  //       type: PRODUCT_CREATE_SUCCESS,
+  //       data,
+  //     });
+  //   };
+  // };
+  
+  
+
+
+
+  export const createProduct = formData => async dispatch => {
+    try {
+      dispatch({ type: PRODUCT_CREATE_REQUEST });
+
+      const {user, token} = isExists();
+        console.log(user, token, "yoyo");
+
+      const config = {
+        headers: {
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`
+      }
+      }
+      const {data} = await axios.post(`${API_PRODUCT}/create/${user._id}`, formData, config);
+
+      console.log(data, "fffff")
       dispatch({
-        type: CREATE_PRODUCT,
-        data,
+        type: PRODUCT_CREATE_SUCCESS,
+        payload: data,
       });
-    };
+    } catch (error) {
+    
+      dispatch({
+        type: PRODUCT_CREATE_FAIL,
+        payload: error.data,
+      });
+    }
   };
-  
-  

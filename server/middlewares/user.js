@@ -12,8 +12,6 @@ const userById = (req, res, next, id) => {
 
             req.profile = user;
 
-            console.log(user)
-
             next();
         })
 

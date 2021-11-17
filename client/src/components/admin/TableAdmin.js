@@ -5,7 +5,6 @@ import Modal from './Modal';
 import SuiteTable from './SuiteTable';
 
 
-
 const TableAdmin = () => {
 
     const [showModal, setShowModal] = useState(false);

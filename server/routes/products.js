@@ -19,6 +19,10 @@ const { userById } = require('../middlewares/user');
 const { requireSignIn, isAuth, isAdmin } = require('../middlewares/auth');
 
 router.post('/create/:userId', [requireSignIn, isAuth, isAdmin], createProduct);
+//router.post('/create',  createProduct);
+
+
+
 
 router.get('/all', getAllProducts)
 

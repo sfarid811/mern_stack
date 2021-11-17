@@ -5,6 +5,7 @@ const productRoutes = require('./routes/products');
 const categorytRoutes = require('./routes/categories');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
+const postRoutes = require('./routes/posts')
 const expressValidator= require('express-validator');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
@@ -21,6 +22,7 @@ app.use('/api/product', productRoutes);
 app.use('/api/category', categorytRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes)
 
 
 const CONNECTION_URL = "mongodb+srv://sfarid811:Saad.2016@cluster0.dbyqd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";

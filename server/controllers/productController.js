@@ -1,7 +1,6 @@
 const Product = require("../models/product");
 const formidable = require("formidable");
 const fs = require("fs");
-const mongoose = require("mongoose");
 const { extend, parseInt } = require("lodash");
 
 
@@ -23,9 +22,12 @@ const createProduct = (req, res) => {
       }
       await product.save();
       // product.photo = undefined;
-      return res.status(200).send(product);
+      return res.status(200).json({product});
+
+     
     } catch (error) {
 
+      res.status(400).json({message: "Product cannot be saved"});
     }
   });
 };
@@ -211,7 +213,7 @@ try {
 
   res.json({ products });
 } catch (err) {
-  console.log(err, 'filter Controller.searchByQueryType error');
+  // console.log(err, 'filter Controller.searchByQueryType error');
   res.status(500).json({
     errorMessage: 'Please try again later',
   });

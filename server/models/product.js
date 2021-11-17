@@ -29,11 +29,11 @@ const productSchema = new mongoose.Schema({
         ref: 'Category',
         required: true,
     },
-    shipping: {
-        type: Boolean,
-        require: false,
-        default: false
-    }
+    // shipping: {
+    //     type: Boolean,
+    //     require: false,
+    //     default: false
+    // }
 }, {timestamps: true});
 
 productSchema.index({name : 'text'})

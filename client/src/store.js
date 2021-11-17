@@ -6,6 +6,7 @@ import userRegisterReducer  from './reducers/userReducers';
 import userLoginReducer  from './reducers/userReducers';
 import categoryReducer  from './reducers/categoryReducers';
 import shopFilterReducer  from './reducers/shopFilterReducers';
+import postReducer  from './reducers/postReducers';
 
 const reducer = combineReducers({
    productList: productReducers,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
    userLogin: userLoginReducer,
    categoryReducer: categoryReducer,
    filterReducer: shopFilterReducer,
+   postReducer: postReducer
   
 
   })
