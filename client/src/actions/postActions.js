@@ -11,6 +11,7 @@ import {
 
     } 
      from '../constants/postsConstants';
+     import { toast } from "react-toastify";
 
 export const getAllPosts = () => async (dispatch) => { 
 
@@ -23,6 +24,7 @@ export const getAllPosts = () => async (dispatch) => {
             type: POST_LIST_SUCCESS,
             payload: data
         })
+        toast.success("MY SUCCESS");
      
 
     }

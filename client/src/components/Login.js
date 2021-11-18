@@ -15,7 +15,7 @@ const Login = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (email === '' || password === '') {
-      alert('The form should not be emty')
+      alert('The form should not be empty')
     }
     else {
       dispatch(login(email, password));

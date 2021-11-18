@@ -1,14 +1,18 @@
 import React from 'react';
-import ImageProduct from './ImageProduct';
+// import ImageProduct from './ImageProduct';
 
 const Product = ({ product }) => {
 
     return (
         <div className="shadow-lg bg-white rounded-xl overflow-hidden flex">
             <div className="flex flex-col">
-                <ImageProduct item={product} url="/photo" />
+                {/* <ImageProduct item={product} url="/photo" /> */}
+                <img src={process.env.PUBLIC_URL + `/images/${product.photo}`}  alt={`${product.name}`}
+                 className="h-96 w-full object-cover cursor-pointer bg-opacity-500" />
+                    
+                
                 <h1 className="text-lg font-bold leading-tight text-darken py-4 ml-4">{product.name}</h1>
-                <p className="font-normal text-gray-700 px-4 flex-grow flex-1 pb-4">{product.description.substring(0,85)}
+                <p className="font-normal text-gray-700 px-4 flex-grow flex-1 pb-4">{product.description}
                  <span className="text-xl font-bold text-gray-900">...</span></p>
                 <div className="flex px-4 justify-around items-center">
                  <span className="text-xl text-gray-900 font-bold">{product.price.toLocaleString('en-US')}/mo</span>

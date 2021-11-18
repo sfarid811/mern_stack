@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts, getProductsByFilter } from '../actions/productActions';
-// import Error from '../components/helpers/Error';
 import ShowLoading from './helpers/ShowLoading'
 
 const Products = () => {
     const dispatch = useDispatch();
     const productList = useSelector(state => (state.productList));
 
-    const { error, loading, products } = productList;
+    const { loading, products } = productList;
 
 
     const [text, setText] = useState('');
@@ -40,20 +39,20 @@ const Products = () => {
                6.13401 17 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </span>
-
-
+                
                 <input className="w-full xs:mx-4 border rounded-md xs:pl-6 pl-10 pr-4 py-2 focus:border-gray-500 focus:outline-none focus:shadow-outline"
                     placeholder="Search"
                     name="search"
                     value={text}
                     onChange={handleSearch}
                 />
+                {/* <span>Number of results : {products.length}</span>  */}
             </div>
 
             {loading ? <ShowLoading /> : (
                 <div className="grid gap-4 grid-cols-3 md:grid-cols-2 sm:grid-cols-1 md:mx-4 sm:mx-4" >
-                    {products.map((product, index) => (
-                        <Product product={product} key={index} />
+                    {products.map((product, i) => (
+                        <Product product={product} key={product._id} />
                     ))}
                 </div>
             )}

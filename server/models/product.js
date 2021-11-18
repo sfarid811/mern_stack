@@ -18,22 +18,25 @@ const productSchema = new mongoose.Schema({
         require: true
     },
     quantity: {
-        type: Number
-    },
-    photo: {
-        data: Buffer,
-        contentType: String
+        type: Number,
+        require: true
+
     },
     category: {
         type: ObjectId,
         ref: 'Category',
         required: true,
     },
-    // shipping: {
-    //     type: Boolean,
-    //     require: false,
-    //     default: false
-    // }
+    photo: {
+        type: String,
+        required: true,
+        
+    },
+    shipping: {
+        type: Boolean,
+        require: false,
+        default: false
+    }
 }, {timestamps: true});
 
 productSchema.index({name : 'text'})

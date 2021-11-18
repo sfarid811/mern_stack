@@ -2,7 +2,6 @@ import React, {useEffect, Fragment} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import {getAllPosts} from '../actions/postActions';
 
-
 const Test = () => {
 
     const dispatch = useDispatch();
@@ -15,9 +14,9 @@ const Test = () => {
     console.log(postReducer)
     return (
         <div>
-            {postReducer.map((post, index) => (
+            {postReducer.map((post, i) => (
                 <Fragment>
-                    <p key={index}> {post.title} : {post.description}</p>
+                    <p key={post._id}> {post.title} : {post.description}</p>
                     <img  src={process.env.PUBLIC_URL + `/images/${post.photo}`}  />
 
                 </Fragment>

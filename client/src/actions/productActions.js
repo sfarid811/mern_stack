@@ -9,17 +9,17 @@ import {PRODUCT_LIST_REQUEST,
     PRODUCT_CREATE_FAIL
 }
      from '../constants/productConstants';
-import {USER_LOGOUT} from '../constants/userConstants';
+
 import {API_PRODUCT} from '../config';
 import {listProductsByFilter, helperProduct} from './index';
-import {extractAuth, isExists} from '../components/admin/helper';
+import {isExists} from '../components/admin/helper';
 
 export const getAllProducts = () => async (dispatch) => { 
 
     try {
         dispatch({type: PRODUCT_LIST_REQUEST})
 
-        const {data} = await axios.get(`${API_PRODUCT}/all`);
+        const {data} = await axios.get(`${API_PRODUCT}/allProducts`);
      
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -114,7 +114,7 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
           "Authorization": `Bearer ${token}`
       }
       }
-      const {data} = await axios.post(`${API_PRODUCT}/create/${user._id}`, formData, config);
+      const {data} = await axios.post(`${API_PRODUCT}/addProduct/${user._id}`, formData, config);
 
       console.log(data, "fffff")
       dispatch({

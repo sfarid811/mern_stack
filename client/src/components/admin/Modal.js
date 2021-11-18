@@ -45,16 +45,16 @@ const Modal = ({ setShowModal }) => {
 	 {
 			let formData = new FormData();
 
-			formData.append('photo', photo);
 			formData.append('name', name);
-			formData.append('quantity', quantity);
-			formData.append('price', price);
-			formData.append('category', category);
 			formData.append('description', description);
+			formData.append('price', price);
+			formData.append('quantity', quantity);
+			formData.append('photo', photo);
+			formData.append('category', category);
 
 			dispatch(createProduct(formData));
 
-            console.log(...formData);
+            //console.log(...formData);
 			setProductData({
 				photo: null,
 				name: '',
@@ -153,7 +153,8 @@ const Modal = ({ setShowModal }) => {
 
                                     <option value="0">Select a category</option>
                                     {categories && categories.map((category, i) => (
-                                        <option key={i} value={category.name}>{category._id}</option>
+                                        <option key={category._id}
+                                        value={category._id}>{category.name}</option>
                                     ))}
 
 

@@ -1,7 +1,8 @@
-import React, {useState}  from 'react';
+import React, {useState, Fragment} from 'react';
 import {createPost} from '../actions/postActions';
 import {useDispatch} from 'react-redux';
-
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const CreatePost = () => {
     const dispatch = useDispatch();
 
@@ -39,7 +40,17 @@ const CreatePost = () => {
         data.append('title', title);
         data.append('description', description);
         data.append('photo', photo);
-
+            if(photo === "" || title === "" || description === "") {
+                return toast.error("Veuillez remplir le formulaire", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
         dispatch(createPost(data))
         setProductData({
             photo: null,
@@ -51,7 +62,19 @@ const CreatePost = () => {
     }
     return (
        
-        <div className="fixed z-10 inset-0">
+       <Fragment>
+           <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+            <div className="fixed z-10 inset-0">
         <div className="flex items-end justify-center my-32 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
             <div className="fixed inset-0 transition-opacity">
@@ -124,6 +147,7 @@ const CreatePost = () => {
                                   type='submit'
                             // onClick={() => setShowModal(false)}
                         >Save</button>
+                         
 
 
                     </div>
@@ -131,6 +155,7 @@ const CreatePost = () => {
             </div>
         </div>
     </div>
+       </Fragment>
     )
 }
 

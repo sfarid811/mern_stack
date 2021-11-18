@@ -4,8 +4,11 @@ const Post = require('../models/post');
 
 const router = express.Router();
 
-const {createPost, getAllPosts} = require('../controllers/postController');
+const {getAllPosts} = require('../controllers/postController');
 const multer = require('multer');
+
+const {userById} = require('../middlewares/user');
+const { requireSignIn, isAuth, isAdmin } = require('../middlewares/auth');
 
 const storage = multer.diskStorage({
 		destination: function (req, file, callback) {
@@ -18,7 +21,7 @@ const storage = multer.diskStorage({
 	
 	const upload = multer({ storage });
 
-router.post('/add', upload.single('photo'), (req, res) => {
+router.post('/add/:userId', upload.single('photo'), [requireSignIn, isAuth, isAdmin], (req, res) => {
     try {
 		const newPost = new Post ({
 			title: req.body.title,
@@ -35,6 +38,7 @@ router.post('/add', upload.single('photo'), (req, res) => {
 	}
 })
 
+router.param('userId', userById);
 
 router.get('/all', getAllPosts)
 module.exports = router;
