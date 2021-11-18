@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllProducts } from '../../actions/productActions';
+import { getAllProducts, getProductsByFilter } from '../../actions/productActions';
 import Modal from './Modal';
 import SuiteTable from './SuiteTable';
 
@@ -14,6 +14,20 @@ const TableAdmin = () => {
     const productList = useSelector(state => state.productList);
 
     const {products } = productList;
+
+    const [text, setText] = useState('');
+
+    const resetState = () => {
+        setText('');
+
+    };
+
+    const handleSearch = (e) => {
+        resetState()
+        setText(e.target.value);
+        dispatch(getProductsByFilter({ type: 'text', query: e.target.value }));
+    }
+
 
   
     useEffect(() => {
@@ -44,7 +58,11 @@ const TableAdmin = () => {
                             <input placeholder="Search"
                                 className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b
                              block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white 
-                             focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
+                             focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" 
+                             name="search"
+                             value={text}
+                             onChange={handleSearch}
+                             />
                         </div>
                     </div>
                     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -66,7 +84,7 @@ const TableAdmin = () => {
                                         </th>
                                         <th
                                             className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Status
+                                            Actions
                                         </th>
                                     </tr>
                                 </thead>
@@ -81,7 +99,7 @@ const TableAdmin = () => {
                             <div
                                 className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
                                 <span className="text-xs xs:text-sm text-gray-900">
-                                    Showing 1 to 4 of 50 Entries
+                                    Showing 1 to 3 of 9 Products
                                 </span>
                                 <div className="inline-flex mt-2 xs:mt-0">
                                     <button

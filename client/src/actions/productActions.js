@@ -6,7 +6,11 @@ import {PRODUCT_LIST_REQUEST,
     MORE_PRODUCTS,
     PRODUCT_CREATE_REQUEST,
     PRODUCT_CREATE_SUCCESS,
-    PRODUCT_CREATE_FAIL
+    PRODUCT_CREATE_FAIL,
+    PRODUCT_DELETE_REQUEST,
+    PRODUCT_DELETE_SUCCESS,
+    PRODUCT_DELETE_FAIL
+
 }
      from '../constants/productConstants';
 
@@ -126,6 +130,32 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
       dispatch({
         type: PRODUCT_CREATE_FAIL,
         payload: error.data,
+      });
+    }
+  };
+
+
+  export const deleteProduct = productId => async dispatch => {
+    try {
+      dispatch({ type: PRODUCT_DELETE_REQUEST });
+      const {user, token} = isExists();
+
+    const config = {
+      headers: {
+        "Accept": "application/json",
+        "Authorization": `Bearer ${token}`
+    }
+    }
+
+      const {data} = await axios.delete(`${API_PRODUCT}/${productId}/${user._id}`, config);
+      dispatch({
+        type: PRODUCT_DELETE_SUCCESS,
+        payload: data,
+      });
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_DELETE_FAIL,
+        payload: err.response.data.errorMessage,
       });
     }
   };

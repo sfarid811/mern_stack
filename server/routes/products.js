@@ -78,6 +78,22 @@ router.get('/allProducts',  async (req, res) => {
            })
 })
 
+
+// router.delete('/:id', (req, res) => {
+  
+//     try {
+//         const {id} = req.params.id;
+
+//         Product.findByIdAndDelete(id);
+
+//         res.status(204).send({message: 'Product deleted successfully'})
+//     }
+//     catch(error) {
+//         res.status(400).send({message: 'Product cannot be deleted successfully'})
+//     }
+
+
+// })
 router.get('/all', getAllProducts)
 
 router.get('/photo/:productId', photoProduct);

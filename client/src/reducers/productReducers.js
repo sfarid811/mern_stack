@@ -4,7 +4,8 @@ import {
     PRODUCT_LIST_FAIL,
     FILTERED_PRODUCTS,
     MORE_PRODUCTS,
-    PRODUCT_CREATE_SUCCESS
+    PRODUCT_CREATE_SUCCESS,
+    PRODUCT_DELETE_SUCCESS
 }
     from '../constants/productConstants';
 
@@ -41,6 +42,11 @@ const productReducers = (state = inititalState, action) => {
          
              products: [...state.products, action.payload]
              };
+
+             case PRODUCT_DELETE_SUCCESS:
+			return {
+				products: state.products.filter(product => product._id !== action.payload._id)
+			};
         
         case FILTERED_PRODUCTS:
 
