@@ -41,6 +41,29 @@ export const getAllProducts = () => async (dispatch) => {
 
 }
 
+export const getProductsByCount = () => async (dispatch) => { 
+
+  try {
+      dispatch({type: PRODUCT_LIST_REQUEST})
+
+      const {data} = await axios.get(`${API_PRODUCT}/count`);
+   
+      dispatch({
+          type: PRODUCT_LIST_SUCCESS,
+          payload: data
+      })
+   
+
+  }
+  catch (error) {
+      dispatch({
+          type: PRODUCT_LIST_FAIL, 
+          payload: error.data 
+      })
+  }
+
+}
+
 export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
     return async (dispatch) => {
       let data = await listProductsByFilter(skip, limit, filter);

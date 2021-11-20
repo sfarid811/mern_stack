@@ -9,8 +9,7 @@ import Shop from './components/Shop';
 import NotFound from './components/NotFound';
 import TableAdmin from './components/admin/TableAdmin';
 import PrivateRoute from './components/admin/PrivateRoute';
-import Test from './components/Test';
-import CreatePost from './components/CreatePost';
+import Features from './components/features/Features';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 const App = () => {
@@ -39,14 +38,13 @@ const App = () => {
     <Router>
         <Navbar toggle={toggle} />
         <Dropdown isOpen={isOpen} toggle={toggle}/>
+        
           <Switch>
              <Route  path='/' exact component={LandingPage}/>
              <Route  path='/login' exact component={Login} />
              <Route  path='/register' exact component={SignUp} />
              <Route  path='/products'  exact component={Products}/>
              <Route  path='/shop'  exact component={Shop}/>
-             <Route  path='/test'  exact component={Test}/>
-             <Route  path='/addPost'  exact component={CreatePost}/>
              <PrivateRoute  path='/admin/products'  exact component={TableAdmin}/>
              <Route  component={NotFound}/>
           </Switch>

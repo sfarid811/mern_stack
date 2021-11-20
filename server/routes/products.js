@@ -78,22 +78,21 @@ router.get('/allProducts',  async (req, res) => {
            })
 })
 
+router.get('/count', async (req, res) => {
+    try {
+		const products = await Product.find({})
+			.populate('category')
+			.limit(3);
 
-// router.delete('/:id', (req, res) => {
-  
-//     try {
-//         const {id} = req.params.id;
-
-//         Product.findByIdAndDelete(id);
-
-//         res.status(204).send({message: 'Product deleted successfully'})
-//     }
-//     catch(error) {
-//         res.status(400).send({message: 'Product cannot be deleted successfully'})
-//     }
-
-
-// })
+		res.json({ products });
+        // console.log(products.length) 3
+	} catch (err) {
+		console.log(err, 'productController.readAll error');
+		res.status(500).json({
+			errorMessage: 'Please try again later',
+		});
+	}
+})
 router.get('/all', getAllProducts)
 
 router.get('/photo/:productId', photoProduct);

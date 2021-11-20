@@ -99,9 +99,9 @@ const Modal = ({ setShowModal }) => {
                                 <div className="w-12 h-12 mr-4 flex-none rounded-xl border overflow-hidden">
                                     <img className="w-12 h-12 mr-4 object-cover" src="https://images.unsplash.com/photo-1611867967135-0faab97d1530?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1352&amp;q=80" alt="Avatar Upload" />
                                 </div>
-                                <label className="cursor-pointer ">
-                                    <span className="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 
-                                                hover:bg-green-500 hover:shadow-lg">Picture</span>
+                                <label className="cursor-pointer">
+                                    <span className="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-gray-900 
+                                                hover:bg-gray-700 hover:shadow-lg">Picture</span>
                                     <input type="file" className="hidden"
                                         // accept="image/*"
                                         name='photo'
@@ -183,8 +183,8 @@ const Modal = ({ setShowModal }) => {
                             > Cancel
 
                             </button>
-                            <button className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider 
-                                        text-white rounded-full hover:shadow-lg hover:bg-green-500 focus:outline-none"
+                            <button className="mb-2 md:mb-0 bg-gray-900 px-5 py-2 text-sm shadow-sm font-medium tracking-wider 
+                                        text-white rounded-full hover:shadow-lg hover:bg-gray-700 focus:outline-none"
                                 type='submit'
                             // onClick={() => setShowModal(false)}
                             >Save</button>
