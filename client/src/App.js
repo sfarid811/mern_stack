@@ -45,6 +45,7 @@ const App = () => {
              <Route  path='/register' exact component={SignUp} />
              <Route  path='/products'  exact component={Products}/>
              <Route  path='/shop'  exact component={Shop}/>
+             <Route  path='/features'  exact component={Features}/>
              <PrivateRoute  path='/admin/products'  exact component={TableAdmin}/>
              <Route  component={NotFound}/>
           </Switch>

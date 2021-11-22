@@ -44,8 +44,7 @@ const Modal = ({ setShowModal }) => {
 
     const handleProductSubmit = e => {
         e.preventDefault();
-
-        {
+        
             let formData = new FormData();
 
             formData.append('name', name);
@@ -54,7 +53,10 @@ const Modal = ({ setShowModal }) => {
             formData.append('quantity', quantity);
             formData.append('photo', photo);
             formData.append('category', category);
-
+            if(name === '' || description === '' || quantity === '' || photo === '' || category === '' || price === ''){
+                alert('Tous les champs sont obligatoires!')
+            };
+               
             dispatch(createProduct(formData));
 
             //console.log(...formData);
@@ -66,7 +68,7 @@ const Modal = ({ setShowModal }) => {
                 category: '',
                 quantity: '',
             });
-        }
+        
     };
 
     useEffect(() => {
@@ -103,10 +105,8 @@ const Modal = ({ setShowModal }) => {
                                     <span className="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-gray-900 
                                                 hover:bg-gray-700 hover:shadow-lg">Picture</span>
                                     <input type="file" className="hidden"
-                                        // accept="image/*"
+                                        accept="image/*"
                                         name='photo'
-                                
-
                                         onChange={handlephoto}
                                     />
                                 </label>
@@ -151,13 +151,14 @@ const Modal = ({ setShowModal }) => {
                                 <select className="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter 
                                             rounded-lg h-10 px-4 md:w-full focus:outline-none"
                                     name='category'
+                                    value={category}
                                     onChange={handleProductChange}
                                 >
 
                                     <option value="0">Select a category</option>
                                     {categories && categories.map((category, i) => (
-                                        <option key={category._id}
-                                            value={category._id}>{category.name}</option>
+                                        <option  key={i}
+                                        value={category._id}>{category.name}</option>
                                     ))}
 
 
@@ -179,14 +180,14 @@ const Modal = ({ setShowModal }) => {
                         <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
                             <button className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider
                                          border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100 focus:outline-none"
-                            // onClick={() => setShowModal(false)}
+                            onClick={() => setShowModal(false)}
                             > Cancel
 
                             </button>
                             <button className="mb-2 md:mb-0 bg-gray-900 px-5 py-2 text-sm shadow-sm font-medium tracking-wider 
                                         text-white rounded-full hover:shadow-lg hover:bg-gray-700 focus:outline-none"
                                 type='submit'
-                            // onClick={() => setShowModal(false)}
+                         
                             >Save</button>
 
 
