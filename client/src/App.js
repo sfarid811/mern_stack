@@ -10,6 +10,7 @@ import NotFound from './components/NotFound';
 import TableAdmin from './components/admin/TableAdmin';
 import PrivateRoute from './components/admin/PrivateRoute';
 import Features from './components/features/Features';
+import GridFilter from './components/features/GridFilter';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
              <Route  path='/products'  exact component={Products}/>
              <Route  path='/shop'  exact component={Shop}/>
              <Route  path='/features'  exact component={Features}/>
+             <Route  path='/filter'  exact component={GridFilter}/>
              <PrivateRoute  path='/admin/products'  exact component={TableAdmin}/>
              <Route  component={NotFound}/>
           </Switch>
