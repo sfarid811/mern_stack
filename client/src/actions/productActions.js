@@ -113,20 +113,6 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
   };
 
 
-  // export const createProduct = (product) => {
-  //   const { token, user } = extractAuth();
-  //   return async (dispatch) => {
-  //     let data = await helperProduct(token, user._id, product);
-  //     dispatch({
-  //       type: PRODUCT_CREATE_SUCCESS,
-  //       data,
-  //     });
-  //   };
-  // };
-  
-  
-
-
 
   export const createProduct = formData => async dispatch => {
     try {

@@ -22,8 +22,8 @@ const GridFilter = () => {
     }, [])
     return (
         <div className="max-w-7xl mx-auto mt-24 ">
-            <div class="grid grid-cols-4  gap-6 md:grid-cols-3 sm:grid-cols-1 mx-12">
-                <div className="">
+            <div class="grid grid-cols-4 gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 mx-12">
+                <div className="row-span-3">
                     <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">categories</h3>
 
                     <Fragment>
@@ -42,12 +42,12 @@ const GridFilter = () => {
                         <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Price</h3>
                         <div class="mt-4 flex items-center">
                             <input type="text"
-                                class="w-full border-gray-900 focus:outline-none px-3 py-2 text-gray-600 text-sm shadow-md rounded"
-                                placeholder="min" />
+                                class="w-full border-gray-900 focus:outline-none px-3 py-2 text-gray-900 text-sm shadow-md rounded"
+                                placeholder="$ min" />
                             <span class="mx-3 text-xl text-gray-900">-</span>
                             <input type="text"
-                                class="w-full border-gray-900 focus:outline-none px-3 py-2 text-gray-600 text-sm shadow-md rounded"
-                                placeholder="max" />
+                                class="w-full border-gray-900 focus:outline-none px-3 py-2 text-gray-900 text-sm shadow-md rounded"
+                                placeholder="$ max" />
                         </div>
                     </div>
 

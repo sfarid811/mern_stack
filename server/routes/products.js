@@ -82,14 +82,14 @@ router.get('/count', async (req, res) => {
     try {
 		const products = await Product.find({})
 			.populate('category')
-			.limit(3);
+			.limit(4);
 
 		res.json({ products });
         // console.log(products.length) 3
 	} catch (err) {
 		console.log(err, 'productController.readAll error');
 		res.status(500).json({
-			errorMessage: 'Please try again later',
+			error: 'Please try again later',
 		});
 	}
 })
