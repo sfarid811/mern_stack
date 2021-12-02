@@ -24,7 +24,7 @@ const SignUp = ({history}) => {
       setName("");
       setEmail("");
       setPassword("");
-      history.push('/');
+      history.push('/admin/products');
     }
   
  

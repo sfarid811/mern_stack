@@ -1,25 +1,32 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductsByCount } from '../../actions/productActions';
+import { getAllProducts } from '../../actions/productActions';
 import { getAllCategories } from '../../actions/categoryActions';
 import Card from './Card';
+import Paginate from './Paginate';
 
 
-const GridFilter = () => {
+const GridFilter = ({ match }) => {
     const dispatch = useDispatch();
-    const products = useSelector(state => (state.productList.products));
+    const productList = useSelector(state => (state.productList));
+
+    const { products, pages, page } = productList;
+
     const categories = useSelector(state => (state.categoryReducer.categories));
 
-
-
+    let [location, setLocation] = useState("");
+    let [minPrice, setMinPrice] = useState(0);
+    let [maxPrice, setMaxPrice] = useState(Infinity);
+    let [sorts, setSort] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         dispatch(getAllCategories());
     }, [])
 
     useEffect(() => {
-        dispatch(getProductsByCount());
-    }, [])
+        dispatch(getAllProducts(currentPage, location, minPrice, maxPrice, sorts));
+    }, [dispatch, currentPage, location, minPrice, maxPrice, sorts])
     return (
         <div className="max-w-7xl mx-auto mt-24 ">
             <div class="grid grid-cols-4 gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 mx-12">
@@ -30,10 +37,12 @@ const GridFilter = () => {
                         {categories && categories.map((category, i) => (
                             <div className="flex items-center mt-4" key={category._id}>
                                 <input type="checkbox"
+                                    onChange={(e) => setLocation(e.target.value)}
                                     className="text-primary  rounded-sm cursor-pointer" value={category._id} id={i} />
                                 <label for="Bedroom" className="text-gray-600 ml-3 cursor-pointer">{category.name}</label>
                                 <div htmlFor={i} className="ml-auto text-gray-600 text-sm">{categories.length}</div>
                             </div>
+
                         ))}
 
                     </Fragment>
@@ -55,11 +64,16 @@ const GridFilter = () => {
 
                 {products.map((product, i) => (
                     <Card product={product} key={i} />
+
                 ))}
 
 
-
             </div>
+            <Paginate pages={pages} page={page}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+            />
+
         </div>
     )
 }

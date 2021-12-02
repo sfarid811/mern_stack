@@ -9,7 +9,7 @@ const Products = () => {
     const productList = useSelector(state => (state.productList));
 
     const { loading, products } = productList;
-
+    
 
     const [text, setText] = useState('');
 

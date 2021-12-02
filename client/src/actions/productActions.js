@@ -15,15 +15,15 @@ import {PRODUCT_LIST_REQUEST,
      from '../constants/productConstants';
 
 import {API_PRODUCT} from '../config';
-import {listProductsByFilter, helperProduct} from './index';
+import {listProductsByFilter} from './index';
 import {isExists} from '../components/admin/helper';
 
-export const getAllProducts = () => async (dispatch) => { 
+export const getAllProducts = (pageNumber = '', location = '', minPrice = 0, maxPrice = Infinity, sorts = '') => async (dispatch) => { 
 
     try {
         dispatch({type: PRODUCT_LIST_REQUEST})
 
-        const {data} = await axios.get(`${API_PRODUCT}/allProducts`);
+        const {data} = await axios.get(`${API_PRODUCT}/listproducts?pageNumber=${pageNumber}&location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}&sorts=${sorts}`);
      
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -35,7 +35,10 @@ export const getAllProducts = () => async (dispatch) => {
     catch (error) {
         dispatch({
             type: PRODUCT_LIST_FAIL, 
-            payload: error.data 
+            payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.response,
         })
     }
 
@@ -129,7 +132,7 @@ export const POPULATE_PRODUCTS_BY_SEARCH = (skip, limit, filter) => {
       }
       const {data} = await axios.post(`${API_PRODUCT}/addProduct/${user._id}`, formData, config);
 
-      console.log(data, "fffff")
+      console.log(data)
       dispatch({
         type: PRODUCT_CREATE_SUCCESS,
         payload: data,

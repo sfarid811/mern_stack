@@ -9,7 +9,7 @@ const Features = () => {
     const productList = useSelector(state => (state.productList));
 
     const { products } = productList;
-    console.log(products)
+    // console.log(products);
    
     useEffect(() => {
         dispatch(getProductsByCount());
@@ -55,10 +55,10 @@ const Features = () => {
                 </div>
                 <div className="w-2/3 md:w-full">
                     <div className="grid gap-4 grid-cols-3 md:grid-cols-1 sm:grid-cols-1 sm:text-center md:mx-4 lg:mx-4 sm:mx-4" >
-                        {products.map((product) => (
+                        {products.map((product, index) => (
                             <Fragment>
-                                <div className="shadow-lg bg-white rounded-xl overflow-hidden flex">
-                                    <div className="flex flex-col">
+                                <div className="shadow-lg bg-white rounded-xl overflow-hidden flex" key={index}>
+                                    <div className="flex flex-col" >
                                         <img src={process.env.PUBLIC_URL + `/images/${product.photo}`} alt={`${product.name}`}
                                             className="h-48 w-full object-cover cursor-pointer bg-opacity-500" />
 

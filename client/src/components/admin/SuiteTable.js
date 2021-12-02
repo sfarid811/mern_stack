@@ -7,7 +7,7 @@ const SuiteTable = ({ product }) => {
     const dispatch = useDispatch();
 
     const deleteHandler  = (id) => {
-    if (window.confirm('Are you sure')) {
+    if (window.confirm('Are you sure to delete this product?')) {
           dispatch(deleteProduct(id))
         }
     }

@@ -18,7 +18,6 @@ const inititalState = {
 
 const productReducers = (state = inititalState, action) => {
 
-
     switch (action.type) {
         case PRODUCT_LIST_REQUEST:
             return {
@@ -30,12 +29,14 @@ const productReducers = (state = inititalState, action) => {
                 ...state,
                 loading: false,
                 products: [...action.payload.products],
+                pages: action.payload.pages,
+                page: action.payload.page,
 
             }
         case PRODUCT_LIST_FAIL:
             return {
                 ...state,
-                error: action.data.error
+                error: action.payload
             }
         case PRODUCT_CREATE_SUCCESS : 
         return { 
@@ -45,7 +46,7 @@ const productReducers = (state = inititalState, action) => {
 
              case PRODUCT_DELETE_SUCCESS:
 			return {
-				products: state.products.filter(product => product._id !== action.payload._id)
+				products: state.products.filter(product => product._id !== action.payload)
 			};
         
         case FILTERED_PRODUCTS:

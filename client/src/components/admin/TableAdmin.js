@@ -34,7 +34,7 @@ const TableAdmin = () => {
         dispatch(getAllProducts());
     }, [dispatch])
     return (
-        <div className="antialiased font-sans bg-gray-100 h-screen">
+        <div className="antialiased font-sans h-screen my-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="py-8">
                     <div className="flex justify-between">

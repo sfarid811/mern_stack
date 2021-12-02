@@ -45,7 +45,9 @@ const Login = ({ history }) => {
             />
           </div>
           <button type='submit' className="cursor-pointer py-2 px-4 block mt-6 bg-gray-900 hover:bg-gray-700 
-            text-white font-bold w-full text-center rounded">Login</button>
+            text-white font-bold w-full text-center rounded"
+            disabled={!email || !password}
+            >Login</button>
         </form>
       </div>
     </div>

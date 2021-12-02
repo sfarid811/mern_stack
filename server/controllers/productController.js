@@ -67,6 +67,8 @@ const searchProduct = async (req, res) => {
   let skip = Number(req.body.skip);
 
   let findArgs = {};
+
+  //console.log(req.body.filters);
   try {
     for (let key in req.body.filters) {
       if (req.body.filters[key].length > 0) {
@@ -82,7 +84,7 @@ const searchProduct = async (req, res) => {
     }
 
     const products = await Product.find(findArgs)
-      .select("-photo")
+      // .select("-photo")
       .populate("category", "_id name")
       .sort([[sortBy, order]])
       .skip(skip)

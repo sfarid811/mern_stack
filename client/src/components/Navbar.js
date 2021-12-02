@@ -37,9 +37,9 @@ const Navbar = ({ toggle }) => {
         window.addEventListener('scroll', handleScroll)
     }, [])
 
-    let x = ['max-w-7xl mx-auto py-6 px-4'];
+    let x = ['max-w-7xl mx-auto p-4'];
     if (scrolled) {
-        x.push('fixed left-0 right-0 top-0 bg-gray-100 blur-sm bg-indigo-100 opacity-90');
+        x.push('blur-sm');
     }
 
     const handleLogout = () => {
@@ -47,10 +47,11 @@ const Navbar = ({ toggle }) => {
 
     }
 
-    const isActive = ['text-indigo-900'];
+   
     return (
 
-        <div className={x.join(" ")}>
+    <div className="shadow bg-gray-100 fixed w-full z-10 top-0">
+            <div className={x.join(" ")}>
             <nav className="flex justify-between items-center">
                 <NavLink to="/" className="text-2xl font-semibold sm:py-4 capitalize border-l-4 
                 border-indigo-600 rounded-md">rental dream</NavLink>
@@ -92,6 +93,7 @@ const Navbar = ({ toggle }) => {
 
             </nav>
         </div>
+    </div>
     )
 }
 
