@@ -9,7 +9,12 @@ module.exports = {
       'md': {'max': '767px'},
       'sm': {'max': '639px'},
       'xs': {'max': '450px'},
-    }
+    },
+    extend: {
+      backgroundImage: () => ({
+        'app-background': "url('./assets/test.jpg')",
+      })
+    },
   },
   variants : {
     backgroundBlendMode: ['hover', 'focus'],
