@@ -1,6 +1,6 @@
 const express = require('express');
 const Product = require('../models/product');
-
+const fs = require('fs');
 
 const router = express.Router();
 const multer = require('multer');
@@ -78,6 +78,29 @@ router.get('/allProducts', async (req, res) => {
     })
 })
 
+//edit product with Multer 
+
+router.put('/edit/:id', upload.single('photo'), (req, res) => {
+      const { id } = req.params;
+
+      Product.findById(id)
+      .then(product => {
+        product.name =  req.body.name;
+        product.description = req.body.description;
+        product.price = req.body.price;
+        product.quantity =  req.body.quantity;
+        product.category = req.body.category;
+        product.photo =  req.file.originalname;
+
+        product.save()
+        .then(() => res.status(200).json("Product Updated"))
+        .catch(error => res.status(400).json(`Err ${error}`));
+      })
+      .catch(error => res.status(400).json(`Err ${error}`));
+})
+
+
+
 router.get('/listproducts', async (req, res) => {
 
   const pageSize = 4;
@@ -126,9 +149,6 @@ router.get('/listproducts', async (req, res) => {
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 
 });
-
-
-
 
 router.get('/count', async (req, res) => {
   try {

@@ -3,20 +3,21 @@ module.exports = {
   darkMode: false,
   theme: {
     screens: {
-      '2xl': {'max': '1535px'},
-      'xl': {'max': '1279px'},
-      'lg': {'max': '1023px'},
-      'md': {'max': '767px'},
-      'sm': {'max': '639px'},
-      'xs': {'max': '450px'},
+      '2xl': { 'max': '1535px' },
+      'xl': { 'max': '1279px' },
+      'lg': { 'max': '1023px' },
+      'md': { 'max': '767px' },
+      'sm': { 'max': '639px' },
+      'xs': { 'max': '450px' },
     },
+    extend: {},
     extend: {
       backgroundImage: () => ({
         'app-background': "url('./assets/test.jpg')",
       })
     },
   },
-  variants : {
+  variants: {
     backgroundBlendMode: ['hover', 'focus'],
   }
 

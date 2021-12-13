@@ -46,14 +46,19 @@ const Navbar = ({ toggle }) => {
         dispatch(logout())
 
     }
+    const activeStyle = {
+        color: "bg-gray-900",
+      };
 
-//bg-app-background
+    //bg-app-background
     return (
 
         <div className="fixed w-full z-10 top-0">
             <div className={x.join(" ")}>
                 <nav className="flex justify-between items-center">
-                    <NavLink to="/" className="text-2xl font-semibold sm:py-4 capitalize border-l-4 
+                    <NavLink to="/" 
+                    
+                    className="text-2xl font-semibold sm:py-4 capitalize border-l-4 
                 border-red-600 rounded-md">rental dream</NavLink>
                     <div className="flex justify-between items-center" onClick={toggle}>
                         <svg class="w-8 h-8 hidden md:block"
@@ -78,16 +83,23 @@ const Navbar = ({ toggle }) => {
 
                         {!userInfo && (
                             <Fragment>
-                                <NavLink to="/" className={`mr-10 text-lg font-medium`}>Home</NavLink>
-                                <NavLink to="/products" className={`mr-10 text-lg font-medium`}>About</NavLink>
-                                <NavLink to="/login" className={`mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2`}>Login</NavLink>
-                                <NavLink to="/register" className={`mr-10 text-lg font-medium bg-red-500 hover:bg-red-400 text-white rounded-full px-6 py-2`}>Sign Up</NavLink>
+                                <NavLink to="/" 
+                                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                                className={`mr-10 text-lg font-medium`}>Home</NavLink>
+                                <NavLink 
+                                to="/products" 
+                                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                                className={`mr-10 text-lg font-medium`}>About</NavLink>
+                                <NavLink 
+                                to="/login" 
+                                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                                className={`mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2`}>Login</NavLink>
+                                <NavLink 
+                                to="/register" 
+                                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                                className={`mr-10 text-lg font-medium bg-yellow-500 hover:bg-red-400 text-white rounded-full px-6 py-2`}>Sign Up</NavLink>
                             </Fragment>
                         )}
-
-
-
-
 
                     </div>
 
