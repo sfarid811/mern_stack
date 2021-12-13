@@ -51,8 +51,8 @@ const Products = () => {
 
             {loading ? <ShowLoading /> : (
                 <div className="grid gap-4 grid-cols-3 md:grid-cols-2 sm:grid-cols-1 md:mx-4 sm:mx-4" >
-                    {products.map((product, i) => (
-                        <Product product={product} key={product._id} />
+                    {products.map((product, index) => (
+                        <Product product={product} key={index} />
                     ))}
                 </div>
             )}

@@ -9,6 +9,7 @@ import shopFilterReducer  from './reducers/shopFilterReducers';
 
 const reducer = combineReducers({
    productList: productReducers,
+   product: productReducers,
    userRegister: userRegisterReducer,
    userLogin: userLoginReducer,
    categoryReducer: categoryReducer,

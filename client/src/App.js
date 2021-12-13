@@ -12,6 +12,7 @@ import PrivateRoute from './components/admin/PrivateRoute';
 import Features from './components/features/Features';
 import GridFilter from './components/features/GridFilter';
 import Search from './components/search/Search';
+import ProductById from './components/Product/ProductById';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
              <Route  path='/features'  exact component={Features}/>
              <Route  path='/filter'  exact component={GridFilter}/>
              <Route  path='/search'  exact component={Search}/>
+             <Route  path='/product/:id'  exact component={ProductById}/>
              <PrivateRoute  path='/admin/products'  exact component={TableAdmin}/>
              <Route  component={NotFound}/>
           </Switch>

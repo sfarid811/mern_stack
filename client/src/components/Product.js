@@ -1,6 +1,5 @@
 import React from 'react';
-
-
+import {Link} from 'react-router-dom';
 
 const Product = ({ product }) => {
 
@@ -21,7 +20,7 @@ const Product = ({ product }) => {
                     <span className="flex justify-center items-center"><i class="fas fa-bath text-gray-700 mr-2 hover:text-gray-500 text-2xl cursor-pointer"></i>2 Bathroom</span>
                     <span className="flex justify-center items-center"><i class="fas fa-home text-gray-700 mr-2 hover:text-gray-500 text-2xl cursor-pointer"></i>1700 sqft</span>
                 </div>
-                <button className="bg-gray-900 text-white py-2 px-4 hover:bg-gray-600 capitalize focus:outline-none mt-4">view more</button>
+                <Link to={`/product/${product._id}`} className="block text-center bg-gray-900 text-white py-2 px-4 hover:bg-gray-600 capitalize focus:outline-none mt-4">view more</Link>
 
             </div>
         </div>

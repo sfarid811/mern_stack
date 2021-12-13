@@ -5,7 +5,11 @@ import {
     FILTERED_PRODUCTS,
     MORE_PRODUCTS,
     PRODUCT_CREATE_SUCCESS,
-    PRODUCT_DELETE_SUCCESS
+    PRODUCT_DELETE_SUCCESS,
+    GET_PRODUCT_REQUEST,
+    GET_PRODUCT_SUCCESS,
+    GET_PRODUCT_FAIL,
+
 }
     from '../constants/productConstants';
 
@@ -13,7 +17,7 @@ const inititalState = {
     loading: false,
     products: [],
     error: '',
-    size : null
+    size: null
 }
 
 const productReducers = (state = inititalState, action) => {
@@ -38,17 +42,34 @@ const productReducers = (state = inititalState, action) => {
                 ...state,
                 error: action.payload
             }
-        case PRODUCT_CREATE_SUCCESS : 
-        return { 
-         
-             products: [...state.products, action.payload]
-             };
+        case PRODUCT_CREATE_SUCCESS:
+            return {
 
-             case PRODUCT_DELETE_SUCCESS:
-			return {
-				products: state.products.filter(product => product._id !== action.payload)
-			};
-        
+                products: [...state.products, action.payload]
+            };
+
+        case PRODUCT_DELETE_SUCCESS:
+            return {
+                products: state.products.filter(product => product._id !== action.payload)
+            };
+
+        case GET_PRODUCT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case GET_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                product: action.payload,
+            };
+        case GET_PRODUCT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
         case FILTERED_PRODUCTS:
 
             return {
@@ -56,12 +77,12 @@ const productReducers = (state = inititalState, action) => {
                 products: [...action.data.products],
                 size: action.data.size,
             };
-            case MORE_PRODUCTS:
-                return {
-                  ...state,
-                  products: [...state.products, ...action.data.products],
-                  size: action.data.size,
-                };
+        case MORE_PRODUCTS:
+            return {
+                ...state,
+                products: [...state.products, ...action.data.products],
+                size: action.data.size,
+            };
         default:
             return state
     }
