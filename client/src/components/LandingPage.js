@@ -3,7 +3,9 @@ import Aos from 'aos';
 import "aos/dist/aos.css";
 //import { ReactComponent as ReactLogo } from '../assets/landing.svg';
 import Features from './features/Features';
-import logo from '../assets/real.jpg'
+import logo from '../assets/real.jpg';
+import Services from './Services/Services';
+import Places from './Services/Places';
 const LandingPage = () => {
 
   useEffect(() => {
@@ -24,7 +26,7 @@ const LandingPage = () => {
                 </svg>
                 <input className="bg-gray-100 outline-none sm:w-full" type="text" placeholder="Search ..." />
               </div>
-              <div className="flex justify-center items-center bg-yellow-500 sm:w-full py-3 px-5 h-full text-white font-semibold rounded-md hover:shadow-lg transition duration-3000 cursor-pointer">
+              <div className="flex justify-center items-center  bg-yellow-500 sm:w-full py-3 px-5 h-full text-white font-semibold rounded-md hover:shadow-lg transition duration-3000 cursor-pointer">
                 <span className="">Search</span>
               </div>
             </div>
@@ -38,10 +40,12 @@ const LandingPage = () => {
 
       </div>
       {/* <Features /> */}
+      <Services />
+      <Places />
 
     </Fragment>
 
   )
 }
 
-export default LandingPage
+export default LandingPage;

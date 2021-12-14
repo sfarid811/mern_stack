@@ -99,7 +99,6 @@ const Search = () => {
 
                 ))}
 
-
                 <div>
 
                 </div>

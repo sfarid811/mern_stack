@@ -83,9 +83,9 @@ const Navbar = ({ toggle }) => {
 
                         {!userInfo && (
                             <Fragment>
-                                <NavLink to="/" 
+                                <NavLink to="/search" 
                                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
-                                className={`mr-10 text-lg font-medium`}>Home</NavLink>
+                                className={`mr-10 text-lg font-medium`}>Search</NavLink>
                                 <NavLink 
                                 to="/products" 
                                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
