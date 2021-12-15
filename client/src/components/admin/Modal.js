@@ -190,7 +190,6 @@ const Modal = ({ setShowModal }) => {
                          
                             >Save</button>
 
-
                         </div>
                     </form>
                 </div>

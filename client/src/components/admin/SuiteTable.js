@@ -51,7 +51,6 @@ const SuiteTable = ({ product }) => {
                         </span>
                         {/* <span className="relative">{product.quantity}</span> */}
                       
-                        
                     </span>
                 </td>
 

@@ -22,12 +22,12 @@ import { API_PRODUCT } from '../config';
 import { listProductsByFilter } from './index';
 import { isExists } from '../components/admin/helper';
 
-export const getAllProducts = (pageNumber = '', location = '', minPrice = 0, maxPrice = Infinity, sorts = '') => async (dispatch) => {
+export const getAllProducts = (pageNumber = '') => async (dispatch) => {
 
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST })
 
-    const { data } = await axios.get(`${API_PRODUCT}/listproducts?pageNumber=${pageNumber}&location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}&sorts=${sorts}`);
+    const { data } = await axios.get(`${API_PRODUCT}/listproducts?pageNumber=${pageNumber}`);
 
     dispatch({
       type: PRODUCT_LIST_SUCCESS,

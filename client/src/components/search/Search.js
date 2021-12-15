@@ -8,8 +8,7 @@ import Card from '../features/Card';
 
 const Search = () => {
 
-
-    const [limit] = useState(3)
+    const [limit] = useState(6)
     const [skip, setSkip] = useState(0)
     const [size, setSize] = useState(0)
     const [categories, setCategories] = useState([]);
@@ -18,7 +17,6 @@ const Search = () => {
         category: [],
         price: []
     })
-
 
     const getCategories = async () => {
         try {

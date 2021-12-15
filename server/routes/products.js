@@ -104,50 +104,23 @@ router.put('/edit/:id', upload.single('photo'), (req, res) => {
 router.get('/listproducts', async (req, res) => {
 
   const pageSize = 4;
-  const page = Number(req.query.pageNumber) || 1;
-  const { location, minPrice, maxPrice, sorts } = req.query;
-  const price = minPrice && maxPrice ? { minPrice, maxPrice } : false;
+  const page = Number(req.query.pageNumber) || 1
 
-  const sortItems = {
-    HighestPrice: { type: "price", order: -1 },
-    LowestPrice: { type: "price", order: 1 },
-    Newest: { type: "createdAt", order: -1 },
-  };
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {}
 
-  const sortType = sorts
-    ? [[sortItems[sorts].type, sortItems[sorts].order]]
-    : "";
-
-
-
-  const filterObj = {
-
-    ...(location && { category: { $in: location } }),
-    ...(price && {
-      price: {
-        $gte: price.minPrice,
-        $lte: price.maxPrice,
-      },
-    }),
-  };
-
-
-  const count = await Product.countDocuments({
-    $and: [
-      filterObj,
-    ],
-  });
-  const products = await Product.find({
-    $and: [
-      filterObj,
-    ],
-  })
-  .populate('category')
-    .sort(sortType)
+  const count = await Product.countDocuments({ ...keyword })
+  const products = await Product.find({ ...keyword })
     .limit(pageSize)
-    .skip(pageSize * (page - 1));
-  res.json({ products, page, pages: Math.ceil(count / pageSize) });
+    .skip(pageSize * (page - 1))
 
+  res.json({ products, page, pages: Math.ceil(count / pageSize)})
 });
 
 router.get('/count', async (req, res) => {

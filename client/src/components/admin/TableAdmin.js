@@ -3,17 +3,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts, getProductsByFilter } from '../../actions/productActions';
 import Modal from './Modal';
 import SuiteTable from './SuiteTable';
+import Paginate from './Paginate';
 
 
 const TableAdmin = () => {
 
     const [showModal, setShowModal] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const dispatch = useDispatch();
 
     const productList = useSelector(state => state.productList);
 
-    const {products } = productList;
+    const {products, pages, page } = productList;
+
+    console.log(pages, page, "foo")
 
     const [text, setText] = useState('');
 
@@ -31,8 +35,8 @@ const TableAdmin = () => {
 
   
     useEffect(() => {
-        dispatch(getAllProducts());
-    }, [dispatch])
+        dispatch(getAllProducts(currentPage));
+    }, [dispatch, currentPage])
     return (
         <div className="antialiased font-sans h-screen my-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -102,16 +106,7 @@ const TableAdmin = () => {
                                     Showing 1 to 3 of 9 Products
                                 </span>
                                 <div className="inline-flex mt-2 xs:mt-0">
-                                    <button
-                                        className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 mr-2 rounded-l
-                                    focus:outline-none">
-                                        Prev
-                                    </button>
-                                    <button
-                                        className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 mr-2 rounded-r
-                                    focus:outline-none">
-                                        Next
-                                    </button>
+                                 <Paginate pages={pages} page={page} currentPage={currentPage} setCurrentPage={setCurrentPage} />
                                 </div>
                             </div>
                         </div>
