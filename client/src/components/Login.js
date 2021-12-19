@@ -10,8 +10,6 @@ const Login = ({ history }) => {
   const dispatch = useDispatch();
 
 
-
-
   const onSubmit = (e) => {
     e.preventDefault();
     if (email === '' || password === '') {

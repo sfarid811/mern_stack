@@ -2,10 +2,12 @@ import React, { useEffect, Fragment } from 'react';
 import Aos from 'aos';
 import "aos/dist/aos.css";
 //import { ReactComponent as ReactLogo } from '../assets/landing.svg';
-import Features from './features/Features';
+// import Features from './features/Features';
 import logo from '../assets/real.jpg';
 import Services from './Services/Services';
 import Places from './Services/Places';
+import Newsletter from './Services/Newsletter';
+import Testimonials from './Services/Testimonials';
 const LandingPage = () => {
 
   useEffect(() => {
@@ -17,7 +19,7 @@ const LandingPage = () => {
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-1">
           <div className="flex flex-col justify-center items-start lg:order-last">
             <h1 className="text-3xl font-medium text-black-600 leading-normal xl:px-4">Find Your Perfect
-              <strong className="">Future Home</strong>.</h1>
+              <strong className="text-bg-500">Future Home</strong>.</h1>
             <p className="text-gray-500 mt-4 mb-6 xl:px-4 text-lg">We provide a complete service for the sale, purchase or rental of real estate. We have been operating more than 10 years. Search millions of apartments and houses on Realty.</p>
             <div className="flex xs:flex-col items-center gap-4 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
               <div className="flex bg-gray-100 p-4 w-96 md:w-full rounded-lg space-x-6">
@@ -39,10 +41,11 @@ const LandingPage = () => {
 
 
       </div>
-      {/* <Features /> */}
+    
       <Services />
       <Places />
-
+      <Testimonials />
+      <Newsletter />
     </Fragment>
 
   )

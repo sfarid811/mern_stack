@@ -10,6 +10,7 @@ import {
 } from '../constants/userConstants';
 import { API_URL } from '../config';
 
+
 export const register = (name, email, password) => async (dispatch) => {
   try {
     dispatch({

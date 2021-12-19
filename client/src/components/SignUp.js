@@ -7,16 +7,13 @@ const SignUp = ({history}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch()
-
-  // const userRegister = useSelector((state) => state.userRegister)
-  // const { loading, error, userInfo } = userRegister;
-  
+  const dispatch = useDispatch();
 
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if(name === '' || email === '' || password === '')  {
+
+   if(name === '' || email === '' || password === '')  {
       alert('The form should not be emty')
     }
     else {
@@ -24,10 +21,9 @@ const SignUp = ({history}) => {
       setName("");
       setEmail("");
       setPassword("");
-      history.push('/admin/products');
-    }
+       history.push('/admin/products');
+     }
   
- 
   }
     return (
         <div className="h-screen flex justify-center">

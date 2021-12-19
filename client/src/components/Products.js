@@ -10,7 +10,6 @@ const Products = () => {
 
     const { loading, products } = productList;
     
-
     const [text, setText] = useState('');
 
     const resetState = () => {
@@ -27,7 +26,6 @@ const Products = () => {
 
     useEffect(() => {
         dispatch(getAllProducts())
-
     }, [dispatch])
     return (
 

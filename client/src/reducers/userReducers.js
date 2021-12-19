@@ -7,8 +7,7 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGOUT
 } from '../constants/userConstants';
-
-
+import { toast } from "react-toastify";
 
 
 const userRegisterReducer = (state = {}, action) => {
@@ -18,6 +17,9 @@ const userRegisterReducer = (state = {}, action) => {
         loading: true
       }
     case USER_REGISTER_SUCCESS:
+      toast("Welcome...", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       return {
         loading: false,
         userInfo: action.payload

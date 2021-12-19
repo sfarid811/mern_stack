@@ -14,6 +14,9 @@ import {
   GET_PRODUCT_REQUEST,
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_FAIL,
+  PRODUCTS_NEXT_PAGE_REQUREST,
+  PRODUCTS_NEXT_PAGE_SUCCESS,
+  PRODUCTS_NEXT_PAGE_FAIL
 
 }
   from '../constants/productConstants';
@@ -185,6 +188,21 @@ export const getProductId = id => async dispatch => {
   } catch (error) {
     dispatch({
       type: GET_PRODUCT_FAIL,
+      payload: error.data,
+    });
+  }
+};
+
+export const nextPageProducts = (page) => async dispatch => {
+  try {
+    dispatch({ type: PRODUCTS_NEXT_PAGE_REQUREST });
+ 
+    const { data } = await axios.get(`${API_PRODUCT}/listproducts?page=${page}`);
+
+    dispatch({ type: PRODUCTS_NEXT_PAGE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PRODUCTS_NEXT_PAGE_FAIL,
       payload: error.data,
     });
   }

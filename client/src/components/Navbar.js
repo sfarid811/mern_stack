@@ -15,49 +15,34 @@ const Navbar = ({ toggle }) => {
 
     const splitLocation = pathname.split("/")[1];
 
-    console.log(splitLocation)
 
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin;
 
-    const [scrolled, setScrolled] = useState(false);
+    const [top, setTop] = useState(true);
 
-    const handleScroll = () => {
-        const offset = window.scrollY;
-
-        if (offset > 92) {
-            setScrolled(true);
-        }
-        else {
-            setScrolled(false);
-        }
-    }
+    
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
-    }, [])
-
-    let x = ['max-w-7xl mx-auto p-4'];
-    if (scrolled) {
-        x.push('blur-sm bg-gray-50 shadow');
-    }
-
+        const scrollHandler = () => {
+          window.pageYOffset > 10 ? setTop(false) : setTop(true)
+        };
+        window.addEventListener('scroll', scrollHandler);
+        return () => window.removeEventListener('scroll', scrollHandler);
+      }, [top]);  
+ 
     const handleLogout = () => {
         dispatch(logout())
-
     }
-    const activeStyle = {
-        color: "bg-gray-900",
-      };
+   
 
     //bg-app-background
     return (
 
-        <div className="fixed w-full z-10 top-0">
-            <div className={x.join(" ")}>
+        <div className={`fixed py-4 top-0 w-full z-30 transition duration-300 ease-in-out ${!top && 'bg-white blur shadow-lg'}`}>
+              <div className="max-w-7xl mx-auto px-5">
                 <nav className="flex justify-between items-center">
                     <NavLink to="/" 
-                    
                     className="text-2xl font-semibold sm:py-4 capitalize border-l-4 
                 border-red-600 rounded-md">rental dream</NavLink>
                     <div className="flex justify-between items-center" onClick={toggle}>
@@ -73,8 +58,8 @@ const Navbar = ({ toggle }) => {
                             <Fragment>
                                 <NavLink to="/admin/products" className={`mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2`}>
                                     Dashboard</NavLink>
-                                <NavLink to="/login" exact className={`mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white 
-                            rounded-full px-6 py-2`}
+                                <NavLink to="/login" exact className={`mr-10 text-lg font-medium bg-yellow-500 hover:opacity-90 text-white 
+                            px-6 py-2`}
                                     onClick={handleLogout}
                                 >Logout </NavLink>
 
@@ -84,20 +69,20 @@ const Navbar = ({ toggle }) => {
                         {!userInfo && (
                             <Fragment>
                                 <NavLink to="/search" 
-                                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
-                                className={`mr-10 text-lg font-medium`}>Search</NavLink>
+                                
+                                className={`mr-10 text-lg font-medium border-b-2 border-yellow-500`}>Search</NavLink>
                                 <NavLink 
                                 to="/products" 
-                                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                             
                                 className={`mr-10 text-lg font-medium`}>About</NavLink>
                                 <NavLink 
                                 to="/login" 
-                                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                           
                                 className={`mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2`}>Login</NavLink>
                                 <NavLink 
                                 to="/register" 
-                                style={({ isActive }) => (isActive ? activeStyle : undefined)}
-                                className={`mr-10 text-lg font-medium bg-yellow-500 hover:bg-red-400 text-white rounded-full px-6 py-2`}>Sign Up</NavLink>
+                              
+                                className={`mr-10 text-lg font-medium bg-yellow-500 hover:opacity-90 text-white px-6 py-2`}>Sign Up</NavLink>
                             </Fragment>
                         )}
 
