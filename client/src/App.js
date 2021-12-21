@@ -5,12 +5,9 @@ import Products from './components/Products';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Dropdown from './components/Dropdown';
-import Shop from './components/Shop';
 import NotFound from './components/NotFound';
 import TableAdmin from './components/admin/TableAdmin';
 import PrivateRoute from './components/admin/PrivateRoute';
-import Features from './components/features/Features';
-import GridFilter from './components/features/GridFilter';
 import Search from './components/search/Search';
 import ProductById from './components/Product/ProductById';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -47,9 +44,6 @@ const App = () => {
              <Route  path='/login' exact component={Login} />
              <Route  path='/register' exact component={SignUp} />
              <Route  path='/products'  exact component={Products}/>
-             <Route  path='/shop'  exact component={Shop}/>
-             <Route  path='/features'  exact component={Features}/>
-             <Route  path='/filter'  exact component={GridFilter}/>
              <Route  path='/search'  exact component={Search}/>
              <Route  path='/product/:id'  exact component={ProductById}/>
              <PrivateRoute  path='/admin/products'  exact component={TableAdmin}/>

@@ -26,7 +26,6 @@ const Modal = ({ setShowModal }) => {
         quantity,
     } = productData;
 
-  
 
     const handleProductChange = evt => {
         setProductData({
@@ -54,7 +53,7 @@ const Modal = ({ setShowModal }) => {
             formData.append('photo', photo);
             formData.append('category', category);
             if(name === '' || description === '' || quantity === '' || photo === '' || category === '' || price === ''){
-                alert('Tous les champs sont obligatoires!')
+                alert('Please fill the form correctly!')
             };
                
             dispatch(createProduct(formData));
@@ -74,7 +73,6 @@ const Modal = ({ setShowModal }) => {
     useEffect(() => {
         dispatch(getAllCategories());
     }, [dispatch])
-
 
 
     return (
@@ -169,7 +167,7 @@ const Modal = ({ setShowModal }) => {
                         <div className="flex-auto w-full mb-1 text-xs space-y-2">
                             <label className="font-semibold text-gray-600 py-2">Description</label>
                             <textarea required="" name="message" id="" className="w-full min-h-[100px] max-h-[300px] h-28 
-                                        appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg 
+                                        appearance-none block bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg 
                                          py-4 px-4 focus:outline-none"
                                 name='description'
                                 value={description}

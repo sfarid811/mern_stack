@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllProducts, getProductsByFilter, nextPageProducts } from '../../actions/productActions';
+import { getProductsByFilter } from '../../actions/productActions';
 import Modal from './Modal';
 import SuiteTable from './SuiteTable';
 import Paginate from './Paginate';
@@ -9,6 +9,7 @@ import Paginate from './Paginate';
 const TableAdmin = () => {
 
     const [showModal, setShowModal] = useState(false);
+    const [currentId, setCurrentId] = useState(0);
     const [pageNumber, setPageNumber] = useState(0);
     const [numberOfPages, setNumberOfPages] = useState(0);
     const [products, setProducts] = useState([]);
@@ -43,17 +44,17 @@ const TableAdmin = () => {
             setProducts(products);
             setNumberOfPages(totalPages);
           });
-      }, [pageNumber]);
+      }, [pageNumber, currentId]);
  
     return (
         <div className="antialiased font-sans h-screen my-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-8">
                 <div className="py-8">
                     <div className="flex justify-between">
-                        <h2 className="text-2xl font-semibold leading-tight">Products</h2>
-                        <button className="bg-gray-900 text-white py-2 px-4 hover:bg-gray-700  focus:outline-none"
+                        <h2 className="text-2xl font-semibold leading-tight">Properties</h2>
+                        <button className="bg-gradient-to-r from-yellow-300  to-red-400 text-white py-2 px-4 hover:bg-gray-700  focus:outline-none"
                             onClick={() => setShowModal(true)}
-                        >+ Add Product</button>
+                        >+ Add Property</button>
 
                         {showModal ? <Modal setShowModal={setShowModal} /> : null}
                     </div>
@@ -84,7 +85,7 @@ const TableAdmin = () => {
                                     <tr>
                                         <th
                                             className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Product
+                                            Property
                                         </th>
                                         <th
                                             className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -102,7 +103,14 @@ const TableAdmin = () => {
                                 </thead>
                                 <tbody>
                                     {products && products.map(product => (
-                                        <SuiteTable product={product} key={product._id} />
+                                        <SuiteTable
+                                        currentId={currentId} 
+                                        setCurrentId={setCurrentId}
+                                        product={product} 
+                                        key={product._id}
+                                        showModal={showModal}
+                                        setShowModal={setShowModal}
+                                         />
                                     ))}
 
                                 </tbody>

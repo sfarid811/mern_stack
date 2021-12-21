@@ -58,7 +58,8 @@ const Navbar = ({ toggle }) => {
                             <Fragment>
                                 <NavLink to="/admin/products" className={`mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2`}>
                                     Dashboard</NavLink>
-                                <NavLink to="/login" exact className={`mr-10 text-lg font-medium bg-yellow-500 hover:opacity-90 text-white 
+                                <NavLink to="/login" exact className={`mr-10 text-lg font-medium
+                                 bg-gradient-to-r from-yellow-300  to-red-400 hover:opacity-90 text-white 
                             px-6 py-2`}
                                     onClick={handleLogout}
                                 >Logout </NavLink>
@@ -82,7 +83,7 @@ const Navbar = ({ toggle }) => {
                                 <NavLink 
                                 to="/register" 
                               
-                                className={`mr-10 text-lg font-medium bg-yellow-500 hover:opacity-90 text-white px-6 py-2`}>Sign Up</NavLink>
+                                className={`mr-10 text-lg font-medium bg-gradient-to-r from-yellow-300  to-red-400 hover:opacity-90 text-white px-6 py-2`}>Sign Up</NavLink>
                             </Fragment>
                         )}
 

@@ -9,9 +9,7 @@ import {
     GET_PRODUCT_REQUEST,
     GET_PRODUCT_SUCCESS,
     GET_PRODUCT_FAIL,
-    PRODUCTS_NEXT_PAGE_REQUREST,
-    PRODUCTS_NEXT_PAGE_SUCCESS,
-    PRODUCTS_NEXT_PAGE_FAIL
+    PRODUCT_EDIT_SUCCESS,
 }
     from '../constants/productConstants';
 
@@ -71,24 +69,12 @@ const productReducers = (state = inititalState, action) => {
                 loading: false,
                 error: action.payload,
             };
+            case PRODUCT_EDIT_SUCCESS: 
+            return {
+            ...state,
+                products : state.products.map(product => (product._id === action.payload._id ? action.payload : product))
+            }
 
-            case PRODUCTS_NEXT_PAGE_REQUREST:
-                return {
-                  ...state,
-                  loading: true,
-                };
-              case PRODUCTS_NEXT_PAGE_SUCCESS:
-                return {
-                    ...state,
-                products: [...action.payload.products],
-                pages: action.payload.totalPages,
-                };
-              case PRODUCTS_NEXT_PAGE_FAIL:
-                return {
-                  ...state,
-                  loading: false,
-                  error: action.payload,
-                };
         case FILTERED_PRODUCTS:
 
             return {

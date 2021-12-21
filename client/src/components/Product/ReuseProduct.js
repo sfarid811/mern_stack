@@ -17,6 +17,7 @@ const ReuseProduct = ({ product }) => {
                 Heights Estates
             </div>
             <img src={process.env.PUBLIC_URL + `/images/${product.photo}`} alt={`${product.name}`} className="h-96 w-96 bg-cover rounded cursor-pointer" />
+            <p>{product.name}</p>
         </div>
     )
 }
