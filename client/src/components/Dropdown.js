@@ -17,7 +17,7 @@ const Dropdown = ({ isOpen, toggle }) => {
         <div
             className={
                 isOpen
-                    ? 'my-24 grid grid-rows-4 text-center items-center'
+                    ? 'my-24 grid grid-rows-4 text-center items-center h-full'
                     : 'hidden'
             }
             onClick={toggle}>
@@ -37,7 +37,7 @@ const Dropdown = ({ isOpen, toggle }) => {
                     <NavLink to="/" className="mr-10 text-lg font-medium">Home</NavLink>
                     <NavLink to="/products" className="mr-10 text-lg font-medium">About</NavLink>
                     <NavLink to="/login" className="mr-10 text-lg font-medium text-center text-gray-800 rounded-full px-2">Login</NavLink>
-                    <NavLink to="/register" className="mr-10 text-lg font-medium bg-gray-900 hover:bg-gray-700 text-white px-6 py-2">Sign Up</NavLink>
+                    <NavLink to="/register" className="mr-10 text-lg font-medium bg-gradient-to-r from-yellow-300  to-red-400 hover:opacity-90 text-white px-6 py-2">Sign Up</NavLink>
                 </Fragment>
             )}
 

@@ -17,6 +17,7 @@ import {
   PRODUCT_EDIT_REQUEST,
   PRODUCT_EDIT_SUCCESS,
   PRODUCT_EDIT_FAIL,
+  GET_NEW_ARRIVALS
 
 }
   from '../constants/productConstants';
@@ -214,3 +215,22 @@ export const updateProduct = (id, productUpdate) => async dispatch => {
   }
 
 }
+
+export const getNewArrivals = (sortBy = 'desc', limit = 3) => async dispatch => {
+		try {
+			dispatch({ type: PRODUCT_LIST_REQUEST });
+			const {data} = await axios.get(`${API_PRODUCT}/filterArrivals?sortBy=${sortBy}&limit=${limit}`
+			);
+			
+			dispatch({
+				type: GET_NEW_ARRIVALS,
+				payload: data.newArrivals
+			});
+		} catch (error) {
+
+			dispatch({
+				type: PRODUCT_LIST_FAIL,
+				payload: error.data
+			});
+		}
+	};

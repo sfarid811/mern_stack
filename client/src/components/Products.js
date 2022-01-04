@@ -8,8 +8,9 @@ const Products = () => {
     const dispatch = useDispatch();
     const productList = useSelector(state => (state.productList));
 
-    const { loading, products } = productList;
-    
+    const { loading, products, pages } = productList;
+    console.log(products, pages, "test")
+  
     const [text, setText] = useState('');
 
     const resetState = () => {

@@ -13,9 +13,9 @@ const TableAdmin = () => {
     const [pageNumber, setPageNumber] = useState(0);
     const [numberOfPages, setNumberOfPages] = useState(0);
     const [products, setProducts] = useState([]);
-    
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
+    
     const [text, setText] = useState('');
 
     const resetState = () => {
@@ -29,6 +29,7 @@ const TableAdmin = () => {
     }
   
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
+
     const gotoPrevious = () => {
         setPageNumber(Math.max(0, pageNumber - 1));
       };
@@ -117,7 +118,7 @@ const TableAdmin = () => {
                             </table>
 
                             <div
-                                className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
+                                className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
                                 <span className="text-xs xs:text-sm text-gray-900">
                                 <h3>Page of {pageNumber + 1}</h3>
                                 </span>

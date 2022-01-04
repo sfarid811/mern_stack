@@ -83,7 +83,7 @@ const Navbar = ({ toggle }) => {
                                 <NavLink 
                                 to="/register" 
                               
-                                className={`mr-10 text-lg font-medium bg-gradient-to-r from-yellow-300  to-red-400 hover:opacity-90 text-white px-6 py-2`}>Sign Up</NavLink>
+                                className={`mr-10 text-lg font-medium bg-gradient-to-r from-yellow-500 to-yellow-600 hover:opacity-80 text-white px-6 py-2`}>Sign Up</NavLink>
                             </Fragment>
                         )}
 

@@ -1,8 +1,88 @@
-import React from 'react'
+import React from 'react';
+import Footer from '../Footer';
 
 const Newsletter = () => {
+        const stars = [1,2,3,4,5];
+
+        const testimonials = [
+            {
+                id : 1,
+                name : 'KENZIE EDGAR',
+                description : 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo doloremque quos laudantium iure impedit ad.',
+                img : 'https://i.pravatar.cc/100?img=1',
+                Rating : 5
+            },
+            {
+                id : 2,
+                name : 'TOMMIE EWART',
+                description : 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo doloremque quos laudantium iure impedit ad.',
+                img : 'https://i.pravatar.cc/100?img=3',
+                Rating : 5
+            },
+            {
+                id : 3,
+                name : 'NEVADA HERBERTSON',
+                description : 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo doloremque quos laudantium iure impedit ad.',
+                img : 'https://i.pravatar.cc/100?img=5',
+                Rating : 5
+            },
+
+        ];
+
+    
     return (
         <section>
+               <div className="text-center max-w-7xl mx-auto my-8">
+                <h1 className="text-5xl sm:text-3xl font-bold mb-5 text-gray-600">What people are saying.</h1>
+                <h3 className="text-xl mb-5 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
+                <div className="text-center mb-10">
+                    <span className="inline-block w-1 h-1 rounded-full bg-gradient-to-r from-yellow-300  to-red-400 ml-1"></span>
+                    <span className="inline-block w-3 h-1 rounded-full bg-gradient-to-r from-yellow-300  to-red-400 ml-1"></span>
+                    <span className="inline-block w-40 h-1 rounded-full bg-gradient-to-r from-yellow-300  to-red-400"></span>
+                    <span className="inline-block w-3 h-1 rounded-full bg-gradient-to-r from-yellow-300  to-red-400 ml-1"></span>
+                    <span className="inline-block w-1 h-1 rounded-full bg-gradient-to-r from-yellow-300  to-red-400 ml-1"></span>
+                </div>
+                <div className="grid gap-4 grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mx-4 ">
+                    <div className="border border-gray-200 shadow-md rounded h-52">
+                      <div className="flex p-4">
+                      <img src="https://i.pravatar.cc/100?img=1" alt="" className="rounded-full  w-12 h-12 cursor-pointer" />
+                        <span className="font-bold text-sm uppercase text-gray-600 flex items-center ml-4">KENZIE EDGAR</span>
+                      </div>
+                      <p className="text-gray-600 text-sm leading-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo doloremque quos laudantium iure impedit ad.</p>
+                    
+                     <div className="my-4">
+                     {stars.map((star, index) => (
+                             <i className={`fas fa-star text-yellow-400`} key={index}></i>
+                      ))}
+                     </div>
+                       
+                    </div>
+                    <div className="border border-gray-200 shadow-md rounded">
+                      <div className="flex p-4">
+                      <img src="https://i.pravatar.cc/100?img=3" alt="avatar" className="rounded-full w-12 h-12 cursor-pointer" />
+                        <span className="font-bold text-sm uppercase text-gray-600 flex items-center ml-4">TOMMIE EWART</span>
+                      </div>
+                      <p className="text-gray-600 text-sm leading-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo doloremque quos laudantium iure impedit ad.</p>
+                      <div className="my-4">
+                     {stars.map((star, index) => (
+                             <i className={`fas fa-star text-yellow-400`} key={index}></i>
+                      ))}
+                     </div>
+                    </div>
+                    <div className="border border-gray-200 shadow-md rounded">
+                      <div className="flex p-4">
+                      <img src="https://i.pravatar.cc/100?img=5" alt="" className="rounded-full  w-12 h-12 cursor-pointer" />
+                        <span className="font-bold text-sm uppercase text-gray-600 flex items-center ml-4">NEVADA HERBERTSON</span>
+                      </div>
+                      <p className="text-gray-600 text-sm leading-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo doloremque quos laudantium iure impedit ad.</p>
+                      <div className="my-4">
+                     {stars.map((star, index) => (
+                             <i className={`fas fa-star text-yellow-400`} key={index}></i>
+                      ))}
+                     </div>
+                    </div>
+                </div>
+            </div>
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 <div className="pb-12 md:pb-20">
 
@@ -55,6 +135,7 @@ const Newsletter = () => {
 
                 </div>
             </div>
+            <Footer/>
         </section>
     )
 }

@@ -1,6 +1,6 @@
 const express = require('express');
 const Product = require('../models/product');
-const fs = require('fs');
+
 
 const router = express.Router();
 const multer = require('multer');
@@ -13,7 +13,8 @@ const { createProduct,
   removeProduct,
   updateProduct,
   searchProduct,
-  searchByQueryType
+  searchByQueryType,
+  getNewArrivals
 } = require('../controllers/productController')
 
 const storage = multer.diskStorage({
@@ -134,6 +135,9 @@ router.get('/all', getAllProducts)
 router.get('/photo/:productId', photoProduct);
 
 router.get('/:id', showProduct);
+
+//get arrivals products
+router.get('/filterArrivals', getNewArrivals);
 
 // pour la filtration de type checkbox 
 router.post('/search', searchProduct);

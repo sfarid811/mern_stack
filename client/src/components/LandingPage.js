@@ -8,6 +8,8 @@ import Services from './Services/Services';
 import Places from './Services/Places';
 import Newsletter from './Services/Newsletter';
 import Testimonials from './Services/Testimonials';
+import { Link } from 'react-router-dom';
+
 const LandingPage = () => {
 
   useEffect(() => {
@@ -29,7 +31,7 @@ const LandingPage = () => {
                 <input className="bg-gray-100 outline-none sm:w-full" type="text" placeholder="Search ..." />
               </div>
               <div className="flex justify-center items-center  bg-yellow-500 sm:w-full py-3 px-5 h-full text-white font-semibold rounded-md hover:shadow-lg transition duration-3000 cursor-pointer">
-                <span className="">Search</span>
+                <Link to = "/search" className="">Search</Link>
               </div>
             </div>
           </div>
@@ -44,7 +46,7 @@ const LandingPage = () => {
     
       <Services />
       <Places />
-      <Testimonials />
+      
       <Newsletter />
     </Fragment>
 

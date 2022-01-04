@@ -6,6 +6,7 @@ import userRegisterReducer  from './reducers/userReducers';
 import userLoginReducer  from './reducers/userReducers';
 import categoryReducer  from './reducers/categoryReducers';
 import shopFilterReducer  from './reducers/shopFilterReducers';
+import newArrivalsReducer from './reducers/newArrivalsReducer';
 
 const reducer = combineReducers({
    productList: productReducers,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
    userLogin: userLoginReducer,
    categoryReducer: categoryReducer,
    filterReducer: shopFilterReducer,
+   newArrivalsReducer :newArrivalsReducer
   
 
   })
