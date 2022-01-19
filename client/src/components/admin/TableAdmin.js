@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductsByFilter } from '../../actions/productActions';
+import { getProductsByFilter, getAllProducts } from '../../actions/productActions';
 import Modal from './Modal';
 import SuiteTable from './SuiteTable';
 import Paginate from './Paginate';
@@ -10,10 +10,11 @@ const TableAdmin = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [currentId, setCurrentId] = useState(0);
-    const [pageNumber, setPageNumber] = useState(0);
-    const [numberOfPages, setNumberOfPages] = useState(0);
-    const [products, setProducts] = useState([]);
-
+    const [currentPage, setCurrentPage] = useState(0);
+    const productList = useSelector(state => state.productList);
+    const {products, pages } = productList;
+ 
+   
     const dispatch = useDispatch();
     
     const [text, setText] = useState('');
@@ -28,24 +29,20 @@ const TableAdmin = () => {
         dispatch(getProductsByFilter({ type: 'text', query: e.target.value }));
     }
   
-    const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
+    const numberOfPages = new Array(pages).fill(null).map((v, i) => i);
 
     const gotoPrevious = () => {
-        setPageNumber(Math.max(0, pageNumber - 1));
+        setCurrentPage(Math.max(0, currentPage - 1));
       };
     
       const gotoNext = () => {
-        setPageNumber(Math.min(numberOfPages - 1, pageNumber + 1));
+        setCurrentPage(Math.min(pages - 1, currentPage + 1));
       };
-      
+    
+
       useEffect(() => {
-        fetch(`http://localhost:8000/api/product/listproducts?page=${pageNumber}`)
-          .then((response) => response.json())
-          .then(({ totalPages, products }) => {
-            setProducts(products);
-            setNumberOfPages(totalPages);
-          });
-      }, [pageNumber, currentId]);
+        dispatch(getAllProducts(currentPage));
+      }, [currentPage]);
  
     return (
         <div className="antialiased font-sans h-screen my-24">
@@ -56,7 +53,7 @@ const TableAdmin = () => {
                         <button className="bg-gradient-to-r from-yellow-300  to-red-400 text-white py-2 px-4 hover:bg-gray-700  focus:outline-none"
                             onClick={() => setShowModal(true)}
                         >+ Add Property</button>
-
+                        
                         {showModal ? <Modal setShowModal={setShowModal} /> : null}
                     </div>
                     <div className="my-2 flex sm:flex-row flex-col">
@@ -120,16 +117,17 @@ const TableAdmin = () => {
                             <div
                                 className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
                                 <span className="text-xs xs:text-sm text-gray-900">
-                                <h3>Page of {pageNumber + 1}</h3>
+                                <h3>Page of {currentPage + 1}</h3>
                                 </span>
                                 <div className="inline-flex mt-2 xs:mt-0">
-                                    <Paginate
-                                    gotoPrevious={gotoPrevious}
-                                    gotoNext={gotoNext}
-                                    pages={pages}
-                                    setPageNumber={setPageNumber}
-                              
-                                    />
+                                {pages > 1 && <Paginate 
+                                numberOfPages={numberOfPages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                                gotoNext={gotoNext}
+                                gotoPrevious={gotoPrevious}
+                                />}
+                                   
                                 </div>
                             </div>
                         </div>

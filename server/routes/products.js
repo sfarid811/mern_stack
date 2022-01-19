@@ -102,16 +102,25 @@ router.put('/edit/:id', upload.single('photo'), (req, res) => {
 
 
 router.get('/listproducts', async (req, res) => {
-  const PAGE_SIZE = 3;
-  const page = parseInt(req.query.page || "0");
-  const total = await Product.countDocuments({});
-  const products = await Product.find({})
-    .limit(PAGE_SIZE)
-    .skip(PAGE_SIZE * page);
-  res.json({
-    totalPages: Math.ceil(total / PAGE_SIZE),
-    products,
-  });
+  const pageSize = 4;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {}
+
+  const count = await Product.countDocuments({ ...keyword })
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+
+  res.json({ products, page, pages: Math.ceil(count / pageSize) })
+ 
  
 });
 

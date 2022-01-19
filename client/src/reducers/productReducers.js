@@ -17,6 +17,9 @@ const inititalState = {
     loading: false,
     products: [],
     error: '',
+    totalProducts: 0,
+    numOfPages: 1,
+    page: 1,
     size: null
 }
 
@@ -33,8 +36,9 @@ const productReducers = (state = inititalState, action) => {
                 ...state,
                 loading: false,
                 products: [...action.payload.products],
-                pages: action.payload.totalPages,
-            
+                pages: action.payload.pages,  
+                page: action.payload.page,
+                
             }
         case PRODUCT_LIST_FAIL:
             return {
@@ -74,6 +78,7 @@ const productReducers = (state = inititalState, action) => {
             ...state,
                 products : state.products.map(product => (product._id === action.payload._id ? action.payload : product))
             }
+            
 
         case FILTERED_PRODUCTS:
 

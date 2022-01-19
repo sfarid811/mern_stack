@@ -14,6 +14,14 @@ const Features = () => {
     useEffect(() => {
         dispatch(getProductsByCount());
     }, [])
+
+    if (products.length === 0) {
+        return (
+          <div>
+            <h2>No products to display...</h2>
+          </div>
+        )
+      }
     return (
         <div className="max-w-7xl mx-auto mt-24 h-screen">
  

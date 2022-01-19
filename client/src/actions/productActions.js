@@ -17,8 +17,7 @@ import {
   PRODUCT_EDIT_REQUEST,
   PRODUCT_EDIT_SUCCESS,
   PRODUCT_EDIT_FAIL,
-  GET_NEW_ARRIVALS
-
+  GET_NEW_ARRIVALS,
 }
   from '../constants/productConstants';
 
@@ -234,3 +233,4 @@ export const getNewArrivals = (sortBy = 'desc', limit = 3) => async dispatch => 
 			});
 		}
 	};
+

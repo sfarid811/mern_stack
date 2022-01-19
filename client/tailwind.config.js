@@ -45,6 +45,8 @@ module.exports = {
   },
   variants: {
     backgroundBlendMode: ['hover', 'focus'],
+      button: ({ after }) => after(['disabled'])
+    
   }
 
 }
