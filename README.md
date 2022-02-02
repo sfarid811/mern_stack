@@ -10,7 +10,7 @@ Is a fullstack MERN application built to do real-estate.
 - **Protected Routes, Admin Routes and normal routes**
 - **Axios** to make async network calls and **Redux-thunk** for asynchronous actions
 - Sending multipart form-data to server
-- TailWindCSS for UI-Components
+- Tailwindcss for UI-Components
 
 ## Server
 
